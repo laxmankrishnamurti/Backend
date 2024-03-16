@@ -12,7 +12,7 @@ app.get('/api/jokes', (req, res) => {
         {
             id: '1',
             title: 'First joke',
-            description: 'This is the first joke'
+            description: 'This is the first and funny joke'
         },
         {
             id: '2',
