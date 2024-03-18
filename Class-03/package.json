@@ -1,0 +1,18 @@
+{
+  "name": "datamodel",
+  "version": "1.0.0",
+  "description": "Data Modeling",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Laxman Krishnamurti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mongoose": "^8.2.2"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
