@@ -1,3 +1,4 @@
+import { app } from "./app.js"
 import connectDB from "./db/index.js"
 import dotenv from "dotenv"
 
@@ -5,7 +6,44 @@ dotenv.config({
     path: "./env"
 })
 
+const serverPort = process.env.PORT;
+
 connectDB()
+    .then(() => {
+
+        app.on("error", () => {
+            console.log(error)
+            throw error;
+        })
+
+        app.get("/", (req, res) => {
+            res.send('Server is running on localhost.')
+        })
+
+        //The way we define port number prevents from server crashing.
+        app.listen(serverPort || 8000, () => {
+            console.log(`Sever is running on http://localhost:${process.env.PORT}`)
+        })
+    })
+    .catch((error) => {
+        console.error('MongoDB connection failed!!!', error)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
