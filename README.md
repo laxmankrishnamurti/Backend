@@ -118,7 +118,7 @@ app.get("/api/login", (req, res) => {
 });
 ```
 
-if you go on this route then we get the text that is written in Heading-1 tag.
+if you go on this route then you'll get the text that is written in Heading-1 tag.
 
 http://localhost:4000/api/login
 
