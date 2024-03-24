@@ -236,7 +236,7 @@ If we try to do that we get an Error, this will something looks like :-
 'http://localhost:4000/api/jokes' from origin '.........' has been blocked by CORS Policy
 ```
 
-# Why the error comes? And what is CORS Policy?
+# Why the error comes? And what is the CORS Policy?
 
 CORS stands for "Cross Origin Resources Sharing". The policy prevent the request which is not from same Origin. Because, our Frontend application runs on Different PORT or IP address and Our Backend runs on different PORT or IP address. So, that's why our backend server prevent to do that and ofcourse Browser also helps in to prevent from CORS Request.
 
