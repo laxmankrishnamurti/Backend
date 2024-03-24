@@ -271,5 +271,5 @@ Backend is all about performing logic on the data we have.
 
 - What to Sore
 - How to Store
-- How to Process
+- How to Process the data
 - How to give Response
