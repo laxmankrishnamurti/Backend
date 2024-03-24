@@ -17,7 +17,7 @@ connectDB()
         })
 
         app.get("/", (req, res) => {
-            res.send('Server is running on localhost.')
+            res.send(`Server is running on localhost, Port number ${serverPort}`)
         })
 
         //The way we define port number prevents from server crashing.
@@ -55,6 +55,11 @@ connectDB()
 // import mongoose from "mongoose"
 // import { DB_NAME } from "./constants.js"
 // import express from "express"
+// import dotenv from "dotenv"
+
+// dotenv.config({
+//     path: "./env"
+// })
 
 // const app = express();
 
@@ -64,11 +69,13 @@ connectDB()
 //         app.on("error", (error) => {
 //             console.error('app is unable to communicate with the database')
 //         })
-//         console.log("trying......")
 //         app.listen(process.env.PORT, () => {
 //             console.log(`Server is listening on http://localhost:${process.env.PORT}`)
+//         })
+//         app.get('/', (req, res) => {
+//             res.send('Server is running......')
 //         })
 //     } catch (error) {
 //         console.error('Unable to connect databse:', error)
 //     }
-// })
+// })()

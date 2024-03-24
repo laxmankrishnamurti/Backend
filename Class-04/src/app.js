@@ -13,7 +13,7 @@ app.use(cors({
 
 
 /*
-2. Configuration for receiving data which is coming from
+2. Configuration for receiving data which is coming from client side
 Limitation : This is only for receiving json data not a file
 Solution : install "multer-package"
 */
@@ -35,3 +35,7 @@ app.use(express.static("Public"))
 app.use(cookieParser())
 
 export { app }
+
+/**
+ * NOTE :: Middlewares are used by "app.use()" method.
+ */
