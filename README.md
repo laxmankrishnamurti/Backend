@@ -197,7 +197,7 @@ useEffect(() => {
 });
 ```
 
-Step-2 :: Create a server, as we done earlier
+Step-2 :: Create a server, as we done earlier <br>
 Step-3 :: Create a route with any specific name which simply return some Array's object.
 
 ```javascript
