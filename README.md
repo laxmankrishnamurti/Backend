@@ -226,7 +226,7 @@ app.get("/api/jokes", (req, res) => {
 
 Now, the question is that how our frontend fetch all these data which is already on http://localhost:4000/api/jokes route.
 
-Is we can directly fetch the URL?
+Can we directly fetch the URL?
 
 - NO
 
