@@ -1,10 +1,10 @@
-const connectDB = (fun) => {
+const asyncHandler = (fun) => {
     (req, res, next) => {
         Promise.resolve(fun(req, res, next)).catch((error) => next(error))
     }
 }
 
-export { connectDB }
+export { asyncHandler }
 
 
 // Using async & await
