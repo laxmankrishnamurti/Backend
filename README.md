@@ -273,3 +273,38 @@ Backend is all about performing logic on the data we have.
 - How to Store
 - How to Process the data
 - How to give Response
+
+# Hierarchy
+
+As i told you earlier that Backend requires more logic than Frontend. First of all we need some level of preperation for writing Backend. These are :-
+
+- Prepare File Structure
+- package.json, .env, ....etc
+- public
+- src
+- controllers
+- db
+- middlewares
+- models
+- routes
+- utils
+
+- write models based on frontend
+- Create classes for handling errors, response and also create for file uploading logic
+- create a sever and connect DB
+- create routes
+- write controllers for the routes
+- write middlewares
+
+Summary
+(1) Website is loaded
+(2) connecting database and loading all enviroment variables
+(3) once databse connection is successful then start server
+(4) all routes are going to loaded
+(5) middlewares
+(6) once routes completes then controllers are going to activate (just for understanding purpose)
+(7) controllers works based on models
+
+Note :: This is not done yet. Backend has some level of complexity so we need to revise our concept again-&-again. The best way to test your Backend skills is to do lots of Project. Starts from easy level and then add some level of complexity in your project.
+
+There are lots of packages we need to install while working with backend.

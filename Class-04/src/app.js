@@ -41,7 +41,3 @@ import userRouter from "./routes/user.routes.js"
 app.use('/api/v1/users', userRouter)
 
 export { app }
-
-/**
- * NOTE :: Middlewares are used by "app.use()" method.
- */
