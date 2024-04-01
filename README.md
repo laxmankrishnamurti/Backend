@@ -307,4 +307,4 @@ Summary
 
 Note :: This is not done yet. Backend has some level of complexity so we need to revise our concept again-&-again. The best way to test your Backend skills is to do lots of Project. Starts from easy level and then add some level of complexity in your project.
 
-There are lots of packages we need to install while working with backend.
+There are lots of packages we need to install while working with backend so don't be frusted.
