@@ -4,16 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web server using node</title>
-    <link rel="stylesheet" href="./style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card-contianer {
+        width: 50%;
+        padding: 1rem;
+      }
+
+      .card-contianer .card {
+        width: 100%;
+      }
+
+      .profile-image {
+        width: 100%;
+      }
+
+      .profile-image img {
+        width: 100%;
+        height: 200px;
+      }
+
+      .card .username {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <div class="card-container">
       <div class="card">
         <div class="profile-image">
-          <img
-            src="./assets/mac-os-x-os-x-big-sur-hd-wallpaper-863ba887a4a08dd3896af12ae4bd7792.jpg"
-            alt="image"
-          />
+          <img src="**userimage**" alt="image" />
+        </div>
+        <div class="username">
+          <p>Name : **username**</p>
+          <p>Age : **userage**</p>
+        </div>
+        <div class="occupation">
+          <p>Occupation : **userocc**</p>
+        </div>
+
+        <div class="address">
+          <p>Address : **useraddr**</p>
         </div>
       </div>
     </div>
