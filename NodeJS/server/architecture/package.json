@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server concept with Node.js",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "author": "Laxman Krishnamurti",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
