@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
             .replace('**useraddr**', getUser.address.address)
         res.end(modifiedData)
     } else if (req.url.startsWith('/products')) {
-        const userId = req.url.split('/')[2]
+        const userId = req.url.split('/')[2]        //Here, the userId is in string form
         const user = allUsersData.find((check) => {
             if (check.id === (+userId)) {
                 return check
