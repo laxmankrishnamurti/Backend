@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const User = require('./user.model.js')
 
 app.use(express.urlencoded({
     extended: true
@@ -9,20 +8,35 @@ app.use(express.urlencoded({
 app.use(express.json())
 
 DATABASE_URI = 'mongodb+srv://laxmankrishnamurti:CHETANAchetana&&00@cluster0.f3hzy5j.mongodb.net'
-DB_NAME = 'user'
 
-const connectDB = async () => {
-    try {
-        let connectionInstance = mongoose.connect(`${DATABASE_URI}/${DB_NAME}`)
-        console.log('Database connection is successful')
-        console.log(connectionInstance)
-    } catch (error) {
-        console.log('Database connection failed', error)
+mongoose.connect(DATABASE_URI)
+    .then((res) => {
+        console.log('Database connection successfully')
+    })
+    .catch((err) => {
+        console.log('Database connection failed', err)
+    })
+
+const userSchema = mongoose.Schema({
+    username: {
+        type: String,
+        unique: true
+    },
+    email: {
+        type: String,
+        unique: true
+    },
+    password: {
+        type: String
     }
+})
+
+const User = mongoose.model('User', userSchema)
+
+async function createUser(createUsers) {
+    let userInstance = await User.create(createUsers)
+    console.log(userInstance)
 }
-
-connectDB()
-
 
 const PORT = 4046
 
@@ -47,7 +61,7 @@ async function collectFormData(req, res) {
     for (let key in formData) {
         user[key] = formData[key]
     }
-
+    await createUser(user)
     res.json({
         "message": "Data send successfully",
         "userData": user
@@ -57,3 +71,4 @@ async function collectFormData(req, res) {
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`)
 })
+
