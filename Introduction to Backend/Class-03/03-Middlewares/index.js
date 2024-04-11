@@ -52,7 +52,7 @@ function getCourse(req, res) {
 function middle(req, res, next) {
     console.log('middleware one is successfully executed')
     res.redirect('/login')
-    next()
+    // next()
 }
 
 app.listen(PORT, () => {
