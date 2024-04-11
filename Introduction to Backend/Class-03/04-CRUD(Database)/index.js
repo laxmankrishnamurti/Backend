@@ -47,10 +47,7 @@ async function collectFormData(req, res) {
     for (let key in formData) {
         user[key] = formData[key]
     }
-    console.log(user)
-    await User.create({
-        user
-    })
+
     res.json({
         "message": "Data send successfully",
         "userData": user
