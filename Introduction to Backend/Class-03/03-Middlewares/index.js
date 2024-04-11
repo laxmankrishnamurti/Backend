@@ -41,10 +41,6 @@ function getLoginPage(req, res) {
 
 function getPassword(req, res) {
     let data = req.body
-    console.log(data)
-    if (data.password === '1234') {
-        res.send(data)
-    }
 }
 
 function getCourse(req, res) {
