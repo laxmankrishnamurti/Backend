@@ -41,7 +41,9 @@ async function createUser(createUsers) {
 const PORT = 4046
 
 const userRouter = express.Router()
+const fetchRouter = express.Router()
 app.use('/', userRouter)
+app.use('/user', fetchRouter)
 
 let user = {}
 
@@ -50,9 +52,50 @@ userRouter
     .get(getFormPage)
     .post(collectFormData)
 
+fetchRouter
+    .route('/')
+    .get(fetchUser)
+    .post(findOneUser)
+    .patch(updateUser)
+    .delete(deleteUser)
+
 function getFormPage(res, res) {
     res.sendFile('./pages/index.html', {
         root: __dirname
+    })
+}
+
+async function fetchUser(req, res) {
+    let fetchedUser = await User.find()
+    res.json({
+        "message": "User fetched successfully from database",
+        "User's list": fetchedUser
+    })
+}
+
+async function findOneUser(req, res) {
+    let userToFind = req.body
+    let userOne = await User.findOne({ username: `${userToFind.username}` })
+    console.log(userOne)
+    res.json({
+        "message": "Selected user founded successfully",
+        "user-details": userOne
+    })
+}
+
+async function updateUser(req, res) {
+    let userToUpdate = req.body
+    await User.findOneAndUpdate({ username: 'Raunak' }, { username: `${userToUpdate.username}` })
+    res.json({
+        "message": "User updated successfully",
+    })
+}
+
+async function deleteUser(req, res) {
+    let userToDelete = req.body
+    await User.findOneAndDelete({ username: `${userToDelete.username}` })
+    res.json({
+        "message": "user has been deleted successfully"
     })
 }
 
