@@ -5,7 +5,7 @@ import createUser from "../controllers/createUser.controller.js";
 const userRouter = Router()
 
 userRouter
-    .route('/login')
+    .route('/register')
     .get(getUser)
     .post(createUser)
 
