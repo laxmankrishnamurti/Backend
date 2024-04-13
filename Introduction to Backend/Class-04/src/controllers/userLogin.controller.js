@@ -6,11 +6,9 @@ const userLogin = async function (req, res) {
         let isExist = await User.findOne({ email: `${loginDetails.email}` })
         let isCorrect = await User.findOne({ password: `${loginDetails.password}` })
         if (isExist && isCorrect) {
-            res.cookie(
-                "isLoggedIn", true,
-                { maxAge: 1000 * 60 * 60 * 24 },
-                "httpOnly", true
-            )
+            res.cookie("isLoggedIn", true)
+            res.cookie({ maxAge: 1000 * 60 * 60 * 24 })
+            res.cookie({ httpOnly: true })
             res.json({
                 "message": "User logged in successfully",
                 "status": 202
