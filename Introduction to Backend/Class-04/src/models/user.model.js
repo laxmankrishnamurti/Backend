@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import emailValidator from "email-validator"
 
 const userSchema = mongoose.Schema({
     username: {
@@ -7,13 +8,28 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true
+        unique: true,
+        validate: function () {
+            return emailValidator.validate(this.email)
+        }
     },
     password: {
-        type: String
+        type: String,
+    },
+    confirmPassword: {
+        type: String,
+        validate: function () {
+            return this.confirmPassword == this.password
+        }
     }
+})
+
+userSchema.pre('save', function (next) {
+    this.confirmPassword = undefined
+    next()
 })
 
 const User = mongoose.model('User', userSchema)
 
-export default User
+
+export { User, userSchema }
