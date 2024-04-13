@@ -1,5 +1,7 @@
 import mongoose from "mongoose"
 import emailValidator from "email-validator"
+import bcrypt from "bcrypt"
+
 
 const userSchema = mongoose.Schema({
     username: {
@@ -24,12 +26,22 @@ const userSchema = mongoose.Schema({
     }
 })
 
+userSchema.pre('save', async function () {
+    try {
+        let salt = await bcrypt.genSalt(10);
+        let hashedPassword = await bcrypt.hash(this.password, salt)
+        this.password = hashedPassword
+    } catch (error) {
+        console.log('Error while bcrypting password', error)
+    }
+})
+
 userSchema.pre('save', function (next) {
     this.confirmPassword = undefined
     next()
 })
 
-const User = mongoose.model('User', userSchema)
 
+const User = mongoose.model('User', userSchema)
 
 export { User, userSchema }
