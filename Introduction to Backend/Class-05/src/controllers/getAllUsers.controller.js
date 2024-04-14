@@ -1,19 +1,12 @@
-import { User } from "../models/user.model";
-import ApiError from "../utils/ApiError";
+import { User } from "../models/user.model.js"
 
 const getAllUsers = async function (req, res) {
-    let inputData = req.body;
-    let fetchedUser = await User.findOne({ username: `${inputData.username}` })
+    let allUsers = await User.find()
 
-    if (fetchedUser) {
-        if (fetchedUser.password === inputData.password) {
-            if (inputData.username === 'laxmankrishnamurti') {
-                User.role = 'admin'
-            }
-        } else {
-            throw new ApiError(400, "Invalid Password")
-        }
-    } else {
-        throw new ApiError(404, "User not found")
-    }
+    res.json({
+        "message": "This is the list of all users that is stored in our database",
+        "users": allUsers
+    })
 }
+
+export default getAllUsers
