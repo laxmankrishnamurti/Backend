@@ -10,12 +10,6 @@ const loginUser = async function (req, res) {
     if (fetchUser) {
         let password = fetchUser.password
         if (password === inputData.password) {
-            // changing role from normal user to admin
-            if (inputData.username === 'laxmankrishnamurti') {
-                fetchUser.role = 'admin'
-            }
-            console.log(fetchUser)
-
             let generatedToken = generateJWTTokens(inputData.username, inputData.password)
             res.cookie(
                 "isloggedIn", generatedToken
