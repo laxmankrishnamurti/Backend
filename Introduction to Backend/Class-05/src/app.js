@@ -10,4 +10,10 @@ app.use(express.urlencoded({
 }))
 
 
+//Importing routes
+import userRouter from "./routes/user.route.js"
+
+//Routes function declaration
+app.use('/api/v1/user', userRouter)
+
 export { app }
