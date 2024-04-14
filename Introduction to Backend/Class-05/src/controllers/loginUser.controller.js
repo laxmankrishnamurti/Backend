@@ -14,7 +14,9 @@ const loginUser = async function (req, res) {
             res.cookie(
                 "token", generatedToken
             )
-            console.log(generatedToken)
+            res.cookie(
+                "username", inputData.username
+            )
             res.json(
                 new ApiResponse(200, "User logged in successfully")
             )

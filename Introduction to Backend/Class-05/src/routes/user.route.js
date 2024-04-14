@@ -4,6 +4,7 @@ import loginUser from "../controllers/loginUser.controller.js"
 import verifyToken from "../middlewares/verifyToken.middleware.js"
 import getAllUsers from "../controllers/getAllUsers.controller.js"
 import checkUserRole from "../controllers/checkUserRole.controller.js"
+import updateProfile from "../controllers/updateProfile.controller.js"
 
 const userRouter = Router()
 
@@ -19,5 +20,8 @@ userRouter
     .route('/admin')
     .get(checkUserRole, getAllUsers)
 
+userRouter
+    .route('/updateProfile')
+    .patch(verifyToken, updateProfile)
 
 export default userRouter
