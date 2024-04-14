@@ -3,6 +3,7 @@ import signInUser from "../controllers/signInUser.controller.js"
 import loginUser from "../controllers/loginUser.controller.js"
 import verifyToken from "../middlewares/verifyToken.middleware.js"
 import getAllUsers from "../controllers/getAllUsers.controller.js"
+import checkUserRole from "../controllers/checkUserRole.controller.js"
 
 const userRouter = Router()
 
@@ -16,7 +17,7 @@ userRouter
 
 userRouter
     .route('/admin')
-    .get(verifyToken, getAllUsers)
+    .get(checkUserRole, getAllUsers)
 
 
 export default userRouter

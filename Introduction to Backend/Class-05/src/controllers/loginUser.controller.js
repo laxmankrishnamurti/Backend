@@ -14,6 +14,7 @@ const loginUser = async function (req, res) {
             if (inputData.username === 'laxmankrishnamurti') {
                 fetchUser.role = 'admin'
             }
+            console.log(fetchUser)
 
             let generatedToken = generateJWTTokens(inputData.username, inputData.password)
             res.cookie(
