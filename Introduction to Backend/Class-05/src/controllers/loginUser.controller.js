@@ -10,10 +10,11 @@ const loginUser = async function (req, res) {
     if (fetchUser) {
         let password = fetchUser.password
         if (password === inputData.password) {
-            let generatedToken = generateJWTTokens(inputData.username, inputData.password)
+            let generatedToken = await generateJWTTokens(inputData.username, inputData.password)
             res.cookie(
-                "isloggedIn", generatedToken
+                "token", generatedToken
             )
+            console.log(generatedToken)
             res.json(
                 new ApiResponse(200, "User logged in successfully")
             )
