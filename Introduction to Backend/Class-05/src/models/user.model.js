@@ -24,6 +24,15 @@ const userSchema = new monggose.Schema({
         validate: function () {
             return this.password === this.confirmPassword
         }
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: "user"
+    },
+    profileImage: {
+        type: String,
+        default: '/public/deault/profileImage.jpeg'
     }
 })
 
