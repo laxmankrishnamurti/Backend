@@ -6,6 +6,7 @@ import getAllUsers from "../controllers/getAllUsers.controller.js"
 import checkUserRole from "../controllers/checkUserRole.controller.js"
 import updateProfile from "../controllers/updateProfile.controller.js"
 import forgetPassword from "../controllers/forgetPassword.controller.js"
+import getResetToken from "../controllers/getResetToken.controller.js"
 
 const userRouter = Router()
 
@@ -27,11 +28,10 @@ userRouter
 
 userRouter
     .route('/forgetPassword')
-    // .get('/forgetPassword', (req, res) => {
-    //     res.json({
-    //         "message": "You are on forget password page"
-    //     })
-    // })
     .post(forgetPassword)
+
+userRouter
+    .route('/resetPassword')
+    .get(getResetToken)
 
 export default userRouter

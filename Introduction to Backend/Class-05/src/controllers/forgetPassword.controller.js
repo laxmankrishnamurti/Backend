@@ -7,6 +7,7 @@ const forgetPassword = async function (req, res) {
     let inputEmail = req.body.email;
     let fetchedUser = await User.findOne({ email: `${inputEmail}` })
     if (fetchedUser) {
+        let getGeneratedToken;
         let generatedRefreshToken = async function () {
             let hexValues = "0123456789abcdefABCDEF";
 
@@ -18,10 +19,12 @@ const forgetPassword = async function (req, res) {
             fetchedUser.resetToken = randomNumber;
             let updatedDocument = await fetchedUser.save()
             console.log(updatedDocument)
-            return randomNumber;
+            getGeneratedToken = randomNumber;
         };
+        generatedRefreshToken()
+        console.log(getGeneratedToken)
         res.cookie(
-            "resetToken", generatedRefreshToken()
+            "resetToken", getGeneratedToken
         )
         res.json(
             new ApiResponse(201, "Token generated successfully")
