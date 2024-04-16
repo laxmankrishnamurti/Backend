@@ -5,6 +5,7 @@ import verifyToken from "../middlewares/verifyToken.middleware.js"
 import getAllUsers from "../controllers/getAllUsers.controller.js"
 import checkUserRole from "../controllers/checkUserRole.controller.js"
 import updateProfile from "../controllers/updateProfile.controller.js"
+import forgetPassword from "../controllers/forgetPassword.controller.js"
 
 const userRouter = Router()
 
@@ -23,5 +24,14 @@ userRouter
 userRouter
     .route('/updateProfile')
     .patch(verifyToken, updateProfile)
+
+userRouter
+    .route('/forgetPassword')
+    // .get('/forgetPassword', (req, res) => {
+    //     res.json({
+    //         "message": "You are on forget password page"
+    //     })
+    // })
+    .post(forgetPassword)
 
 export default userRouter

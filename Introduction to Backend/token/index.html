@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generate Tokens</title>
+  </head>
+  <body>
+    <h1>Generate Tokens</h1>
+    <button id="generate-tokens">Generate Tokens</button>
+  </body>
+
+  <script>
+    let btn = document.getElementById("generate-tokens");
+    let hexValues = "0123456789abcdefABCDEF";
+
+    btn.addEventListener("click", () => {
+      let generateRandomNumber = function () {
+        let randomNumber = "";
+        for (let i = 0; i < hexValues.length; i++) {
+          randomNumber +=
+            hexValues[Math.floor(Math.random() * hexValues.length)];
+        }
+        return randomNumber;
+      };
+
+      console.log(generateRandomNumber());
+    });
+  </script>
+</html>

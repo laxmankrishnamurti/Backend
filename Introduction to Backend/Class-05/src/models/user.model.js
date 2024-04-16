@@ -33,7 +33,8 @@ const userSchema = new monggose.Schema({
     profileImage: {
         type: String,
         default: '/public/deault/profileImage.jpeg'
-    }
+    },
+    resetToken: String
 })
 
 //Defining database hooks
