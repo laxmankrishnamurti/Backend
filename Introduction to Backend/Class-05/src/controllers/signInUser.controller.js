@@ -6,9 +6,13 @@ import asyncHandler from "../utils/asyncHandler.js"
 const signInUser = asyncHandler(async function (req, res) {
     let { username, email, password, confirmPassword } = req.body
 
-    if ([username, email, password, confirmPassword].some((field) => {
-        return field?.trim() === ""
-    })) {
+    // if ([username, email, password, confirmPassword].some((field) => {
+    //     return field?.trim() === ""
+    // })) {
+    //     throw new ApiError(400, "All fields are reqiured")
+    // }
+
+    if (!(username && email && password && confirmPassword)) {
         throw new ApiError(400, "All fields are reqiured")
     }
 

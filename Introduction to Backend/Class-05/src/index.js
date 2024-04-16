@@ -10,9 +10,9 @@ const serverPORT = process.env.PORT
 
 connectDatabase()
     .then(() => {
-        app.on("error", () => {
-            console.log('Error while app on', error)
-        })
+        // app.on("error", () => {
+        //     console.log('Error while app on', error)
+        // })
 
         app.get('/', (req, res) => {
             res.send(`server is runnin on localhost on PORT : ${serverPORT}`)
