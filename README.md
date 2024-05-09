@@ -61,7 +61,7 @@ And after that change the script file from package.json, that we created earlier
 
 # What is Express?
 
-To be more precise, Express is used for listen queries on a specific port number(while working locally) and give response based on the query. It makes it easier to organize our application functionality with middlewares and routing.
+To be more precise, Express is used for listen queries on a specific route and give response based on the query. It makes it easier to organize our application functionality with middlewares and routing.
 
 ## Install Express.js
 
