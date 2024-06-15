@@ -296,14 +296,14 @@ As i told you earlier that Backend requires more logic than Frontend. First of a
 - write controllers for the routes
 - write middlewares
 
-Summary
-(1) Website is loaded
-(2) connecting database and loading all enviroment variables
-(3) once databse connection is successful then start server
-(4) all routes are going to loaded
-(5) middlewares
-(6) once routes completes then controllers are going to activate (just for understanding purpose)
-(7) controllers works based on models
+Summary 
+- Website is loaded
+- connecting database and loading all enviroment variables
+- once databse connection is successful then start server
+- all routes are going to loaded
+- middlewares
+- once routes completes then controllers are going to activate (just for understanding purpose)
+- controllers works based on models
 
 Note :: This is not done yet. Backend has some level of complexity so we need to revise our concept again-&-again. The best way to test your Backend skills is to do lots of Project. Starts from easy level and then add some level of complexity in your project.
 
