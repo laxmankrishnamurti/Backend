@@ -27,7 +27,7 @@ When Node program runs then two things is happen. First is it creates a <code>ma
 - In Thread-poll
   - Any CPU intensive task is going to be execute in the Thread-poll.
 
-### Note :: Determining between <code>setTimeOut</code> and <code>setImmediate</code> function that which one is going to execute first is Non-deterministic. It is bounded by the performance of the process.
+#### Note :: Determining between <code>setTimeOut</code> and <code>setImmediate</code> function that which one is going to execute first is Non-deterministic. It is bounded by the performance of the process.
 
 If any <code>setTimeOut</code> or <code>setImmediate</code> function is under the I/O polling system it will not starts executing untill I/O polling is not done.
 
@@ -70,3 +70,14 @@ console.log("Top level code is executed!!!");
   - Immediate-2
   - Timer-2
   - Timer-3
+
+# Does Node.js is Single threaded or multi-threaded?
+
+Node.js executes code on single thread. It uses Thread-pool(Multiple threads) to executes CPU-Intensive task.
+But if we talk about the language which executes code on multiple threads called "Multi-threading Programming language" such as PHP. Yes, PHP is multi-threading and server-side-scripting programming language. Such type of programming language uses a seperate thread to execute their code. This can be an advantage and can be disadvantage. Because, all threads can be busy at a time and because of this reason all the remain task will go into waiting stage.
+
+#### Note :: So, as a Backend developer we have to figure-out that which task we should done on single thread or Multiple threads.
+
+# When Promises are executed?
+
+Whenever event-loop phase transition, Node.js starts executing promises.
