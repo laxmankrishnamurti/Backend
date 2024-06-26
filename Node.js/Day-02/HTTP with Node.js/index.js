@@ -1,9 +1,15 @@
 const http = require('http')
 const fs = require('fs')
+const url = require('url')
 
 const PORT = 3000
 const server = http.createServer((req, res) => {
-    if (req.url === '/favicon.ico') return
+    if (req.url === '/favicon.ico') {
+        return res.end()
+    }
+    const requestedUrl = url.parse(req.url, true)
+    console.log(requestedUrl)
+    console.log(requestedUrl.query.name)
 
     const requestedInfo = new Date()
 
@@ -21,7 +27,7 @@ const server = http.createServer((req, res) => {
                 console.log("serverLog updated seccessfully")
             }
         })
-    switch (req.url) {
+    switch (requestedUrl.pathname) {
         case '/':
             res.end("<h1>This is Home page</h1>")
             break;
@@ -33,6 +39,11 @@ const server = http.createServer((req, res) => {
             break;
         case '/signup':
             res.end("<h1>This is signup page</h1>")
+            break;
+        case '/profile':
+            console.log("requestedURL :: ", requestedUrl)
+            const username = requestedUrl.query.username;
+            res.end(`<h1>Hii ${username}</h1>`)
             break;
         default:
             res.end("<h1>404 Page not found...</h1>")
