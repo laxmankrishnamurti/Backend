@@ -8,8 +8,6 @@ const server = http.createServer((req, res) => {
         return res.end()
     }
     const requestedUrl = url.parse(req.url, true)
-    console.log(requestedUrl)
-    console.log(requestedUrl.query.name)
 
     const requestedInfo = new Date()
 
