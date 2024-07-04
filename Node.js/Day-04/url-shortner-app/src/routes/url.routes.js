@@ -17,3 +17,4 @@ router
 .route('/analytics/:id')
 .get(handleURLAnalytics)
 
+module.exports = router
