@@ -18,7 +18,7 @@ connect()
 //Importing routes 
 const urlRouter = require('./src/routes/url.routes')
 
-//Configuring routes by handlers
+//Configuring routes with handlers
 app.use('/url', urlRouter)
 
 app.listen(PORT, (err) => {
