@@ -44,10 +44,28 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .default-redirect {
+            text-decoration: none;
+            display: block;
+            position: absolute;
+        }
+        h3{
+            color: rgb(241, 142, 142);
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div>
+            <% if(locals.status === "false"){ %>
+                <h3>URL is required to generate a shortdID</h3>
+            <% } %>
+        </div>
+        <div>
+            <% if(!locals.id){ %>
+                <a class="default-redirect" href="/">Home page</a>
+            <% } %>
+        </div>
         <form action="/url" method="post">
             <label for="inputurl">Enter the url</label>
             <input name="url" type="text" id="inputurl" placeholder="https://www.example.com">
@@ -57,7 +75,8 @@
             <% if(locals.id) { %>
                 <p>Generated ID : <%= id %> </p>
                 <a style="display: block; margin-bottom: 10px;" href="/url/<%= id %>" target="_blank">Visit the site</a>
-                <a href='/url/analytics/<%= id %>''>Watch Analytics</a>
+                <a style="display: block; margin-bottom: 10px;" href='/url/analytics/<%= id %>''>Watch Analytics</a>
+                <a href='/'>Home Page</a>
             <% } %>
         </div>
     </div>

@@ -19,9 +19,8 @@ async function handleGenerateNewShortID(req, res){
     const url = req.body.url;
 
     if(!url){
-        return res.status(400).json({
-            status: false,
-            msg: "url is required"
+        return res.status(400).render("generateShortID", {
+            status: "false"
         })
     }
 

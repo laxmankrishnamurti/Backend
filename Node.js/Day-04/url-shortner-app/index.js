@@ -21,14 +21,13 @@ app.set("view engine", "ejs")
 app.set("views", path.resolve("./src/views"))
 
 //Importing routes 
+const homeRouter = require('./src/routes/home.routes')
 const urlRouter = require('./src/routes/url.routes')
 
 //Configuring routes with handlers
+app.use('/', homeRouter)
 app.use('/url', urlRouter)
 
-app.get('/', (req, res) => {
-    return res.render("home")
-})
 
 app.listen(PORT, (err) => {
     if(err){
