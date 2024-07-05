@@ -21,6 +21,10 @@ const urlRouter = require('./src/routes/url.routes')
 //Configuring routes with handlers
 app.use('/url', urlRouter)
 
+app.get('/', (req, res) => {
+    return res.send("<h1>Home page</h1>")
+})
+
 app.listen(PORT, (err) => {
     if(err){
         console.error("Error while listening on PORT" + PORT)

@@ -49,7 +49,7 @@ async function handleURL(req, res){
     const result = await URL.findOneAndUpdate({shortID: url}, {
         $push: {
             visitHistory: {
-                timestamp: Date.now().toLocaleString()
+                timestamp: Date.now()
             }
         }
     })
