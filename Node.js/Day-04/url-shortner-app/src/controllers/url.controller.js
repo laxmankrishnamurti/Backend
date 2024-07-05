@@ -1,6 +1,19 @@
 const URL = require('../models/urlShortner.model')
 const generateNerShortID = require('../utils/generateNewShortID')
 
+function handleInputForm(req, res){
+    res.render("generateShortID")
+}
+
+function handleSuccess(req, res){
+    res.render("success")
+}
+
+function handleURLAnalytics(req, res){
+    res.render("analytics")
+}
+
+
 async function handleGenerateNewShortID(req, res){
 
     const url = req.body.url;
@@ -21,11 +34,7 @@ async function handleGenerateNewShortID(req, res){
     })
 
     if(result){
-        res.status(201).json({
-            status: true,
-            msg: "shortID generated successfullt",
-            ID: result.shortID
-        })
+        res.status(201).render("generateShortID", {id: result.shortID})
     }else {
         res.status(500).json({
             status: false,
@@ -77,10 +86,10 @@ async function handleURLAnalytics(req, res){
     }
 
     const result = await URL.findOne({shortID: id})
+    
 
     if(result){
-        return res.status(200).json({
-            status: true,
+        return res.status(200).render("analytics", {
             totalClicks: result.visitHistory.length,
             visitHistory: result.visitHistory
         })
@@ -94,4 +103,4 @@ async function handleURLAnalytics(req, res){
 }
 
 
-module.exports = {handleGenerateNewShortID, handleURL, handleURLAnalytics}
+module.exports = {handleGenerateNewShortID, handleURL, handleURLAnalytics, handleInputForm, handleSuccess}

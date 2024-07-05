@@ -1,6 +1,7 @@
 const express = require('express')
 const connect = require('./src/db/connect')
 const dotenv = require('dotenv')
+const path = require('path')
 
 dotenv.config()
 
@@ -15,6 +16,10 @@ app.use(express.urlencoded({extended: false}))
 //Establishing databse connection
 connect()
 
+//Configuring views file for server-side-rendering
+app.set("view engine", "ejs")
+app.set("views", path.resolve("./src/views"))
+
 //Importing routes 
 const urlRouter = require('./src/routes/url.routes')
 
@@ -22,7 +27,7 @@ const urlRouter = require('./src/routes/url.routes')
 app.use('/url', urlRouter)
 
 app.get('/', (req, res) => {
-    return res.send("<h1>Home page</h1>")
+    return res.render("home")
 })
 
 app.listen(PORT, (err) => {
