@@ -1,6 +1,6 @@
 # What is Backend?
 
-Backend is the data and Infrastructure that make our application work.
+Backend is all about data-processing and the Infrastructure(For Application security) that we built so that our application function properly and give smooth user experience(User perspective).
 
 # Prerequisits for Backend?
 
