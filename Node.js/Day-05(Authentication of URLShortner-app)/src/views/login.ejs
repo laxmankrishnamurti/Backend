@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
+        body {
+            font-family: sans-serif;
+        }
+        
         .login-container{
             width: 50%;
             margin: auto;
@@ -39,6 +43,7 @@
         }
         b {
             text-align: center;
+            color: rgb(253, 121, 121)  ;
         }
     </style>
 </head>
@@ -49,6 +54,11 @@
             <% if (locals.status == "nouser") { %>
                 <b><%= locals.msg %></b>
             <% } %>
+
+            <% if (locals.status == "missing") { %>
+                <b><%= locals.msg %></b>
+            <% } %>
+
             <div class="input-box">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="name" placeholder="Enter Your Username">

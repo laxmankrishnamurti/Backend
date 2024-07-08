@@ -1,4 +1,6 @@
 const USER = require('../models/user.model')
+const {setUser} = require('../utils/authUser.utils')
+const {v4: uuidv4} = require('uuid')
 
 async function handleUserRegistration(req, res){
     const userPayload = req.body
@@ -46,7 +48,12 @@ async function handleUserLogin(req, res){
         })
     }
 
-    const loginUser = await USER.findOne({name, password})
+    const sessionId = uuidv4();
+    const loginUser = await USER.findOne({name, password});
+
+    setUser(sessionId, loginUser)
+
+    res.cookie("sessionId", sessionId);
 
     if(loginUser){
         res.redirect('/')
