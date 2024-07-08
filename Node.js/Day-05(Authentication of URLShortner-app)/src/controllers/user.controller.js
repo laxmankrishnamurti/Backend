@@ -35,4 +35,29 @@ async function handleUserRegistration(req, res){
 
 }
 
-module.exports = {handleUserRegistration}
+
+async function handleUserLogin(req, res){
+    const {name, password} = req.body
+
+    if(!name || !password){
+        res.render("login", {
+            status:"missing",
+            msg: "All fields are required"
+        })
+    }
+
+    const loginUser = await USER.findOne({name, password})
+
+    if(loginUser){
+        res.redirect('/')
+    }else{
+        res.render("login", {
+            status: "nouser",
+            msg: "user dosen't exist, please signup"
+        })
+    }
+
+}
+
+
+module.exports = {handleUserRegistration, handleUserLogin}
