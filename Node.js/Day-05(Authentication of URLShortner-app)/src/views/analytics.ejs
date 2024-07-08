@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Analytics Page</title>
+    <style>
+        div{
+            width: 50%;
+            margin: auto;
+            background-color: aquamarine;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+        a {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        
+        <% if(!locals.totalClicks){ %>
+            <div style="display: flex; justify-content: space-between;">
+                <h1>Total Clicks : 0 </h1>
+                <a class="back-history">Back</a>
+            </div>
+        <% } %>
+        <% if(locals.totalClicks){ %>
+            <div style="display: flex; justify-content: space-between;">
+                <h1>Total Clicks : <%= totalClicks %> </h1>
+                <a class="back-history">Back</a>
+            </div>
+        <% } %>
+        <% if(locals.visitHistory){ %>
+            <% visitHistory.forEach((data) => { %>
+                <ul>
+                    <li>history_id : <%= data._id %></li>
+                    <li>timestamp : <%= data.timestamp %></li>
+                </ul>
+            <% }) %>
+        <% } %>
+    </div>
+</body>
+<script>
+    const backButton = document.querySelector('.back-history')
+    backButton.addEventListener('click', (e) => {
+        window.history.back()
+    })
+</script>
+</html>
