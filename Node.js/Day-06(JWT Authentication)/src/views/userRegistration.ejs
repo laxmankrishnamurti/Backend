@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        #form{
+            width: 50%;
+            padding: 2rem ;
+            border-radius: 1rem;
+            background-color: aquamarine;
+            font-family: sans-serif;
+            margin: auto;
+        }
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input{
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        button {
+            padding: 1rem 5rem;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: aquamarine;
+            color: black;
+        }
+        b{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="/user" method="post" id="form">
+
+        <% if (locals.status == "missing") { %>
+            <b>All fields are required</b>
+        <% } %>
+        
+        <% if (locals.status == "exist") { %>
+            <b><%= locals.msg %></b>
+        <% } %>
+
+        <div class="input-container">
+            <div class="input-box">
+                <label for="username">Name</label>
+                <input type="text" id="username" name="name" placeholder="Enter Your Name">
+            </div>
+            <div class="input-box">
+                <label for="useremail">Email</label>
+                <input type="email" id="useremail" name="email" placeholder="Enter Your Email">
+            </div>
+            <div class="input-box">
+                <label for="userpassword">Password</label>
+                <input type="password" id="userpassword" name="password" placeholder="Enter Your Password">
+            </div>
+            <div class="submit-btn-container">
+                <button type="submit">Create Account</button>
+            </div>
+
+            <a href="/login">Already have an account, login</a>
+        </div>
+    </form>
+</body>
+</html>
