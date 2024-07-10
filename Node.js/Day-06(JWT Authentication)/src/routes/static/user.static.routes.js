@@ -23,4 +23,8 @@ router.route("/url").get(checkUserLoginStatus, (req, res) => {
   return res.render("generateShortID");
 });
 
+router.route("/success").get((req, res) => {
+  return res.render("success");
+});
+
 module.exports = router;

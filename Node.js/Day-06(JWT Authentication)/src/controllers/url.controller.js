@@ -1,14 +1,9 @@
 const URL = require("../models/urlShortner.model");
-const USER = require("../models/user.model");
 const { getUser } = require("../utils/authJWT.utils");
 const generateNerShortID = require("../utils/generateNewShortID");
 
 function handleSuccess(req, res) {
   res.render("success");
-}
-
-function handleURLAnalytics(req, res) {
-  res.render("analytics");
 }
 
 async function handleGenerateNewShortID(req, res) {
@@ -32,7 +27,8 @@ async function handleGenerateNewShortID(req, res) {
   });
 
   if (result) {
-    res.status(201).render("generateShortID", { id: result.shortID });
+    // res.status(201).render("generateShortID", { id: result.shortID });
+    res.status(201).redirect("/");
   } else {
     res.status(500).json({
       status: false,
