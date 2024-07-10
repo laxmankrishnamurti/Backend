@@ -1,5 +1,5 @@
 const USER = require("../models/user.model");
-const { setUser } = require("../utils/authUser.utils");
+const { setUser } = require("../utils/authJWT.utils");
 // const { v4: uuidv4 } = require("uuid");
 
 async function handleUserRegistration(req, res) {
@@ -28,6 +28,9 @@ async function handleUserRegistration(req, res) {
   });
 
   if (createUserAccount) {
+    const loginToken = setUser(createUserAccount);
+    res.cookie("loginToken", loginToken);
+
     res.redirect("/url");
   } else {
     res.render("userRegistration", {
@@ -56,9 +59,9 @@ async function handleUserLogin(req, res) {
     });
   }
 
-  setUser(loginUser);
+  const loginToken = setUser(loginUser);
 
-  res.cookie("sessionId", sessionId);
+  res.cookie("loginToken", loginToken);
 
   if (loginUser) {
     return res.redirect("/");

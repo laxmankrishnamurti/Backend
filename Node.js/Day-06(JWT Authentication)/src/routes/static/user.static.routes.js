@@ -1,25 +1,24 @@
-const express = require('express')
-const URL = require('../../models/urlShortner.model')
+const express = require("express");
+const URL = require("../../models/urlShortner.model");
+const checkUserLoginStatus = require("../../middlewares/checkUserLoginStatus.middleware");
 
-const router = express.Router()
+const router = express.Router();
 
-router
-.route('')
-.get(async (req, res) => {
-    const totalURL = await URL.find({})
-    return res.render("home", {urls : totalURL})
-})
- 
-router
-.route('/user')
-.get((req, res) => {
-    res.render("userRegistration")
-})
+router.route("").get(async (req, res) => {
+  const totalURL = await URL.find({});
+  return res.render("home", { urls: totalURL });
+});
 
-router
-.route('/login')
-.get((req, res) => {
-    res.render("login")
-})
+router.route("/user").get((req, res) => {
+  res.render("userRegistration");
+});
 
-module.exports = router
+router.route("/login").get((req, res) => {
+  res.render("login");
+});
+
+router.route("/url").get(checkUserLoginStatus, (req, res) => {
+  return res.render("generateShortID");
+});
+
+module.exports = router;
