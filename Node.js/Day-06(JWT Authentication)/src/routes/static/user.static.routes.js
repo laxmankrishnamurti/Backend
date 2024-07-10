@@ -4,14 +4,10 @@ const checkUserLoginStatus = require("../../middlewares/checkUserLoginStatus.mid
 
 const router = express.Router();
 
-router.route("").get(async (req, res) => {
-  const loginToken = req.cookies.loginToken;
+router.route("").get(checkUserLoginStatus, async (req, res) => {
+  const loggedInUser = req.user;
 
-  if (!loginToken) {
-    return res.redirect("/login");
-  }
-
-  const totalURL = await URL.find({});
+  const totalURL = await URL.find({ createdBy: loggedInUser._id });
   return res.render("home", { urls: totalURL });
 });
 

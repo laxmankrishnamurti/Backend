@@ -8,6 +8,7 @@ function checkUserLoginStatus(req, res, next) {
   }
 
   const loggedInUserInfo = getUser(token);
+  req.user = loggedInUserInfo;
 
   next();
 }

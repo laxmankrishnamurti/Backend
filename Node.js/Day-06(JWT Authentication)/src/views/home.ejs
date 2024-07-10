@@ -35,13 +35,20 @@
       .visit-link:visited {
         color: blueviolet;
       }
+      .link-container {
+        display: flex;
+        gap: 1rem;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <a href="/url" target="_self"
-        >Click here to generate shorURL for your website</a
-      >
+      <div class="link-container">
+        <a href="/url" target="_self"
+          >Click here to generate shorURL for your website</a
+        >
+        <a href="/user" target="_self">Create New Account</a>
+      </div>
       <div>
         <% if(locals.urls){ %>
         <table border="2">
