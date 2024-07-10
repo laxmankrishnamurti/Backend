@@ -93,9 +93,25 @@ async function handleURLAnalytics(req, res) {
   }
 }
 
+async function handleDeleteURL(req, res) {
+  const urlId = req.params.id;
+
+  const isDeleted = await URL.findOneAndDelete({ _id: urlId });
+
+  if (isDeleted) {
+    return res.status(200);
+  } else {
+    return res.render("home", {
+      status: false,
+      msg: "Internal server error, Delete again",
+    });
+  }
+}
+
 module.exports = {
   handleGenerateNewShortID,
   handleURL,
   handleURLAnalytics,
   handleSuccess,
+  handleDeleteURL,
 };

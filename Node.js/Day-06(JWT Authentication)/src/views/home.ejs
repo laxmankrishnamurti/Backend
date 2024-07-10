@@ -7,6 +7,7 @@
     <style>
       body {
         background-color: rgb(192, 248, 229);
+        box-sizing: border-box;
       }
       .container {
         width: 50%;
@@ -42,6 +43,23 @@
         display: flex;
         gap: 1rem;
       }
+      button {
+        padding: 0.8rem 2rem;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        font-weight: 400;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        transition: all 0.1s ease;
+      }
+
+      button:hover {
+        background-color: rgb(247, 208, 208);
+        color: black;
+      }
     </style>
   </head>
   <body>
@@ -63,6 +81,7 @@
             <th>Click</th>
             <th>Visit</th>
             <th>Analytics</th>
+            <th>Delete</th>
           </thead>
           <tbody>
             <% urls.forEach((url, index) => { %>
@@ -86,6 +105,15 @@
                   target="_self"
                   >Watch</a
                 >
+              </td>
+              <td>
+                <button
+                  id="deleteBtn"
+                  value="<%= url._id %>"
+                  name="<%= url._id %>"
+                >
+                  Delete
+                </button>
               </td>
             </tr>
             <% }) %>
@@ -117,6 +145,38 @@
       document.cookie = `loginToken=; expires=${Date.now()}`;
       window.alert("Cookie has been deleted");
       location.reload();
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const deleteButtons = document.querySelectorAll("#deleteBtn");
+
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const urlID = this.value;
+
+          try {
+            fetch(`/url/${urlID}`, {
+              method: "DELETE",
+            })
+              .then((res) => {
+                console.log(res);
+                location.reload();
+                return res.json();
+              })
+              .then((data) => {
+                if (data.success) {
+                  this.closest("tr").remove();
+                } else {
+                  console.error("Error while deleting the url :: ", data.error);
+                }
+              });
+          } catch (error) {
+            console.error(
+              "Error while sending delete request to delete the url"
+            );
+          }
+        });
+      });
     });
   </script>
 </html>
