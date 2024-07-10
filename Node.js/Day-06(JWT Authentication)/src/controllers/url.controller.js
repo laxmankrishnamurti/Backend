@@ -11,6 +11,7 @@ function handleURLAnalytics(req, res) {
 
 async function handleGenerateNewShortID(req, res) {
   const url = req.body.url;
+  const loginToken = req.cookies.loginToken;
 
   if (!url) {
     return res.status(400).render("generateShortID", {
