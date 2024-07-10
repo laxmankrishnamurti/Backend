@@ -7,7 +7,7 @@ function checkUserLoginStatus(req, res, next) {
     return res.redirect("/login");
   }
 
-  getUser(token);
+  const loggedInUserInfo = getUser(token);
 
   next();
 }

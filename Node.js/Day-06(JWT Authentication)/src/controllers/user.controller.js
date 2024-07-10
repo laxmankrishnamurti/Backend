@@ -60,7 +60,6 @@ async function handleUserLogin(req, res) {
   }
 
   const loginToken = setUser(loginUser);
-
   res.cookie("loginToken", loginToken);
 
   if (loginUser) {

@@ -1,4 +1,6 @@
 const URL = require("../models/urlShortner.model");
+const USER = require("../models/user.model");
+const { getUser } = require("../utils/authJWT.utils");
 const generateNerShortID = require("../utils/generateNewShortID");
 
 function handleSuccess(req, res) {
@@ -20,11 +22,13 @@ async function handleGenerateNewShortID(req, res) {
   }
 
   const generatedID = generateNerShortID(8);
+  const loggedInUserInfo = getUser(loginToken);
 
   const result = await URL.create({
     shortID: generatedID,
     redirectURL: url,
     visitHistory: [],
+    createdBy: loggedInUserInfo._id,
   });
 
   if (result) {
