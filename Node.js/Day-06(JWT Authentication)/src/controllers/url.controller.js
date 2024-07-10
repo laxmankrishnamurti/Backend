@@ -28,7 +28,7 @@ async function handleGenerateNewShortID(req, res) {
     shortID: generatedID,
     redirectURL: url,
     visitHistory: [],
-    createdBy: loggedInUserInfo._id,
+    createdBy: loggedInUserInfo.id,
   });
 
   if (result) {

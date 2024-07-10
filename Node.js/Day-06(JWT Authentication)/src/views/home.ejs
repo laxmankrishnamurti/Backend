@@ -48,6 +48,7 @@
           >Click here to generate shorURL for your website</a
         >
         <a href="/user" target="_self">Create New Account</a>
+        <a href="#" id="logout">Logout</a>
       </div>
       <div>
         <% if(locals.urls){ %>
@@ -83,4 +84,8 @@
       </div>
     </div>
   </body>
+  <script>
+    const logoutBtn = document.getElementById("logout");
+    console.log(logoutBtn);
+  </script>
 </html>
