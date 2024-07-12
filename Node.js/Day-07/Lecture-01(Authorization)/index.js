@@ -26,14 +26,24 @@ app.set("views", path.resolve("./src/views"));
 const staticRouter = require("./src/routes/static/user.static.routes");
 const urlRouter = require("./src/routes/url.routes");
 const userRouter = require("./src/routes/user.routes");
+const adminRouter = require("./src/routes/admin.routes");
 
 //Importing middlewares
-const checkUserLoginStatus = require("./src/middlewares/checkUserLoginStatus.middleware");
+const {
+  checkUserLoginStatus,
+  restrictTo,
+} = require("./src/middlewares/checkUserLoginStatus.middleware");
 
 //Configuring routes with handlers
 app.use("/", staticRouter);
-app.use("/url", checkUserLoginStatus, urlRouter);
+app.use(
+  "/url",
+  checkUserLoginStatus,
+  restrictTo(["NORMAL", "ADMIN"]),
+  urlRouter
+);
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 
 app.listen(PORT, (err) => {
   if (err) {
