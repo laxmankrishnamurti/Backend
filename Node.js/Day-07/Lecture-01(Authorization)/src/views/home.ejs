@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+    <style>
+      body {
+        background-color: rgb(192, 248, 229);
+        box-sizing: border-box;
+      }
+      .container {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0rem;
+        margin: auto;
+        border-radius: 1rem;
+        text-align: center;
+      }
+      thead {
+        background-color: brown;
+        color: white;
+      }
+      th,
+      td {
+        padding: 5px 20px;
+      }
+      .visit-link {
+        text-decoration: none;
+        color: red;
+      }
+      .visit-link:active {
+        color: brown;
+      }
+      .visit-link:visited {
+        color: blueviolet;
+      }
+      .link-container {
+        display: flex;
+        gap: 1rem;
+      }
+      button {
+        padding: 0.8rem 2rem;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        font-weight: 400;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        transition: all 0.1s ease;
+      }
+
+      button:hover {
+        background-color: rgb(247, 208, 208);
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="link-container">
+        <a href="/url" target="_self"
+          >Click here to generate shorURL for your website</a
+        >
+        <a href="/user" target="_self">Create New Account</a>
+        <a href="#" id="logout">Logout</a>
+      </div>
+      <div>
+        <% if(locals.urls){ %>
+        <table border="2">
+          <thead>
+            <th>S.N</th>
+            <th>Short-ID</th>
+            <th>Redirect</th>
+            <th>Click</th>
+            <th>Visit</th>
+            <th>Analytics</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+            <% urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= (index + 1) %></td>
+              <td><%= url.shortID %></td>
+              <td><%= url.redirectURL %></td>
+              <td><%= url.visitHistory.length %></td>
+              <td>
+                <a
+                  class="visit-link"
+                  href="http://localhost:4003/url/<%= url.shortID %>"
+                  target="_blank"
+                  >Go</a
+                >
+              </td>
+              <td>
+                <a
+                  class="visit-link"
+                  href="http://localhost:4003/url/analytics/<%= url.shortID %>"
+                  target="_self"
+                  >Watch</a
+                >
+              </td>
+              <td>
+                <button
+                  id="deleteBtn"
+                  value="<%= url._id %>"
+                  name="<%= url._id %>"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+
+        <% } %>
+      </div>
+    </div>
+  </body>
+  <script>
+    const logoutBtn = document.getElementById("logout");
+    logoutBtn.addEventListener("click", () => {
+      //How to create a list of cookies
+      // function createCookieList() {
+      //   const cookieStr = document.cookie;
+
+      //   const cookieArr = cookieStr.split();
+
+      //   const cookies = cookieArr.reduce((cookies, cookie) => {
+      //     const [name, value] = cookie.split("=").map((x) => x.trim());
+      //     cookies[name] = value;
+      //     return cookies;
+      //   }, {});
+      // }
+
+      // document.cookie = `${cookies.loginToken}`;
+      // document.cookie = `loginToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+      document.cookie = `loginToken=; expires=${Date.now()}`;
+      window.alert("Cookie has been deleted");
+      location.reload();
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const deleteButtons = document.querySelectorAll("#deleteBtn");
+
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const urlID = this.value;
+
+          try {
+            fetch(`/url/${urlID}`, {
+              method: "DELETE",
+            })
+              .then((res) => {
+                console.log(res);
+                location.reload();
+                return res.json();
+              })
+              .then((data) => {
+                if (data.success) {
+                  this.closest("tr").remove();
+                } else {
+                  console.error("Error while deleting the url :: ", data.error);
+                }
+              });
+          } catch (error) {
+            console.error(
+              "Error while sending delete request to delete the url"
+            );
+          }
+        });
+      });
+    });
+  </script>
+</html>
