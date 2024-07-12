@@ -52,3 +52,5 @@ app.listen(PORT, (err) => {
     console.log(`Server is listening on http://localhost:${PORT}`);
   }
 });
+
+//Authentication and Authorization of the application has been completed
