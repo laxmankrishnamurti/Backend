@@ -9,10 +9,13 @@
 
     <div class="container mt-4">
       <form action="/user/signup" method="post">
+        <% if (locals.status === 'missing') { %>
+        <p><%= locals.msg %></p>
+        <% } %>
         <div class="mb-3">
           <label for="fullName" class="form-label">Full Name</label>
           <input
-            type="email"
+            type="text"
             name="fullName"
             class="form-control"
             id="fullName"
