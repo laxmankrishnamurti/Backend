@@ -1,3 +1,4 @@
+const { setToken } = require("../utils/handleToken.utils");
 const USER = require("../models/user.model");
 
 async function handleUserSignUp(req, res) {
@@ -31,11 +32,15 @@ async function handleUserSignIn(req, res) {
     });
   }
 
-  const user = await USER.matchPassword(email, password);
-
-  console.log("logged in user info :: ", user);
-
-  return res.redirect("/");
+  try {
+    const user = await USER.matchPassword(email, password);
+    res.cookie("loginToken", setToken(user));
+    return res.redirect("/");
+  } catch (error) {
+    return res.render("signin", {
+      error: "user dosen't exist",
+    });
+  }
 }
 
 module.exports = { handleUserSignUp, handleUserSignIn };

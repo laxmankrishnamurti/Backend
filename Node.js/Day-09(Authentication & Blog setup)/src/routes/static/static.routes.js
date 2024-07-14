@@ -3,7 +3,9 @@ const express = require("express");
 const router = express.Router();
 
 router.route("").get((req, res) => {
-  return res.render("home");
+  return res.render("home", {
+    user: req.user,
+  });
 });
 
 router.route("/user/signup").get((req, res) => {

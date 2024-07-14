@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
 const connectDatabase = require("./src/database/connectDatabase");
+const cookieparser = require("cookie-parser");
 
 dotenv.config();
 
@@ -13,11 +14,18 @@ const PORT = process.env.PORT || 3000;
 connectDatabase();
 
 //form configuration
+app.use(cookieparser());
 app.use(express.urlencoded({ extended: false }));
 
 //view engine configuration
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./src/views"));
+
+//importing global middleware
+const watchToken = require("./src/middlewares/watchToken.middleware");
+
+//Global middleware configuration
+app.use(watchToken);
 
 //importing routes
 const staticRouter = require("./src/routes/static/static.routes");

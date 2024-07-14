@@ -18,6 +18,11 @@
         <% if (locals.status === 'missing') { %>
         <p class="missing"><%= locals.msg %></p>
         <% } %>
+        <div class="container">
+          <% if (locals.error) { %>
+          <p class="missing"><%= locals.error %></p>
+          <% } %>
+        </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
