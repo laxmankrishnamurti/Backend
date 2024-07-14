@@ -1,7 +1,9 @@
 const BLOG = require("../models/blog.model");
 
 function handleGetAddNewBlog(req, res) {
-  return res.render("addNewBlog");
+  return res.render("addNewBlog", {
+    user: req.user,
+  });
 }
 
 async function handleAddNewBlog(req, res) {
@@ -21,7 +23,6 @@ async function handleAddNewBlog(req, res) {
   });
 
   if (newBlog) {
-    console.log("newBlogInfo :: ", newBlog);
     return res.redirect("/");
   } else {
     return res.render("addNewBlog", {
@@ -30,4 +31,20 @@ async function handleAddNewBlog(req, res) {
   }
 }
 
-module.exports = { handleGetAddNewBlog, handleAddNewBlog };
+async function handleBlogRender(req, res) {
+  const blogId = req.params.id;
+
+  if (!blogId) {
+    return res.redirect("/");
+  }
+
+  const getRequestedBlog = await BLOG.findOne({ _id: blogId });
+  if (getRequestedBlog) {
+    return res.render("readBlog", {
+      blog: getRequestedBlog,
+      user: req.user,
+    });
+  }
+}
+
+module.exports = { handleGetAddNewBlog, handleAddNewBlog, handleBlogRender };

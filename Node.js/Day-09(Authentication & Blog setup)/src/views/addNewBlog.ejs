@@ -3,6 +3,11 @@
   <head>
     <%- include('./partials/head') %>
     <title>Add new Blog</title>
+    <style>
+      .login-user-profile {
+        max-width: 40px;
+      }
+    </style>
   </head>
   <body>
     <div class="bg-warning"><%- include('./partials/nav') %></div>
@@ -33,11 +38,11 @@
             aria-describedby="emailHelp"
           />
         </div>
+        <label for="body">Body</label>
         <div class="form-floating mb-3">
-          <label for="body">Body</label>
           <textarea
             name="body"
-            class="form-control"
+            class="form-control mt-4"
             placeholder="Leave a comment here"
             id="body"
           ></textarea>

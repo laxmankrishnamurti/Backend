@@ -3,12 +3,17 @@
   <head>
     <%- include('./partials/head') %>
     <title>Document</title>
+    <style>
+      .default-logo {
+        max-width: 40px;
+      }
+    </style>
   </head>
   <body>
     <%- include('./partials/nav') %>
 
     <div class="container mt-4">
-      <form action="/user/signup" method="post">
+      <form action="/user/signup" method="post" enctype="multipart/form-data">
         <% if (locals.status === 'missing') { %>
         <p><%= locals.msg %></p>
         <% } %>
@@ -19,6 +24,16 @@
             name="fullName"
             class="form-control"
             id="fullName"
+            aria-describedby="emailHelp"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="profile" class="form-label">Profile</label>
+          <input
+            type="file"
+            name="profile"
+            class="form-control"
+            id="profile"
             aria-describedby="emailHelp"
           />
         </div>

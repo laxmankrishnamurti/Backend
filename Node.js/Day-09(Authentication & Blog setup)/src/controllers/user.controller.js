@@ -15,6 +15,7 @@ async function handleUserSignUp(req, res) {
     fullName: fullName,
     email: email,
     password: password,
+    profileImageUrl: `/uploads/${req.file.filename}`,
   });
 
   if (newUser) {

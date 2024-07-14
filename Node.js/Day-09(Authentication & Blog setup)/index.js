@@ -16,6 +16,7 @@ connectDatabase();
 //form configuration
 app.use(cookieparser());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.resolve("./src/public")));
 
 //view engine configuration
 app.set("view engine", "ejs");
