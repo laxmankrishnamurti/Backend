@@ -18,6 +18,7 @@ async function handleUserSignUp(req, res) {
   });
 
   if (newUser) {
+    res.cookie("loginToken", setToken(newUser));
     return res.redirect("/");
   }
 }
@@ -43,4 +44,8 @@ async function handleUserSignIn(req, res) {
   }
 }
 
-module.exports = { handleUserSignUp, handleUserSignIn };
+function handleLogout(req, res) {
+  res.clearCookie("loginToken").redirect("/");
+}
+
+module.exports = { handleUserSignUp, handleUserSignIn, handleLogout };
