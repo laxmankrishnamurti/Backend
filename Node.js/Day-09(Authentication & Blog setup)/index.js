@@ -29,11 +29,13 @@ app.use(watchToken);
 
 //importing routes
 const staticRouter = require("./src/routes/static/static.routes");
-const userRouter = require("./src/routes/user.route");
+const userRouter = require("./src/routes/user.routes");
+const blogRouter = require("./src/routes/blog.routes");
 
 //routes configuration
 app.use("/", staticRouter);
 app.use("/user", userRouter);
+app.use("/blog", blogRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on http://localhost:${PORT}`);
