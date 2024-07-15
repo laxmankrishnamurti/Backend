@@ -25,6 +25,11 @@
     <h1 class="text-center mt-4">Read Blog</h1>
     <% if (locals.blog) { %>
     <div class="container">
+      <p>Created By,</p>
+      <div class="createdByInfo mb-4">
+        <img src="<%= blog.createdBy.profileImageUrl %>" width="30px" />
+        <b><%= blog.createdBy.fullName %></b>
+      </div>
       <div>
         <img
           class="cover-image"
@@ -38,8 +43,31 @@
       <div>
         <pre><%= blog.body %></pre>
       </div>
+
+      <div>
+        <h2>Comments</h2>
+        <% if (locals.user) { %>
+        <div class="mb-4">
+          <form action="/blog/comment/<%= blog._id %>" method="post">
+            <div class="mb-3">
+              <textarea
+                name="comment"
+                class="form-control mt-4"
+                placeholder="Leave a comment here"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <% } %>
+      </div>
+      <% } %> <% comments.forEach(comment => { %>
+      <div>
+        <img src="<%= comment.userId.profileImageUrl %>" width="30px" />
+        <p class="mt-2"><%= comment.comment %></p>
+      </div>
+      <% }) %>
     </div>
-    <% } %>
   </body>
   <%- include('./partials/script') %>
 </html>

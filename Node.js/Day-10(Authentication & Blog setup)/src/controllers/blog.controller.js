@@ -1,4 +1,5 @@
 const BLOG = require("../models/blog.model");
+const COMMENT = require("../models/comment.model");
 
 function handleGetAddNewBlog(req, res) {
   return res.render("addNewBlog", {
@@ -38,13 +39,43 @@ async function handleBlogRender(req, res) {
     return res.redirect("/");
   }
 
-  const getRequestedBlog = await BLOG.findOne({ _id: blogId });
+  const getRequestedBlog = await BLOG.findOne({ _id: blogId }).populate(
+    "createdBy"
+  );
+  const getAllBlogComment = await COMMENT.find({ blogId: blogId }).populate(
+    "userId"
+  );
+
   if (getRequestedBlog) {
     return res.render("readBlog", {
       blog: getRequestedBlog,
       user: req.user,
+      comments: getAllBlogComment,
     });
   }
 }
 
-module.exports = { handleGetAddNewBlog, handleAddNewBlog, handleBlogRender };
+/**
+ * Comment Controllers
+ */
+
+async function handleAddComment(req, res) {
+  const blogId = req.params.blogId;
+
+  const newComment = await COMMENT.create({
+    comment: req.body.comment,
+    blogId: blogId,
+    userId: req.user._id,
+  });
+
+  if (newComment) {
+    return res.redirect(`/blog/${blogId}`);
+  }
+}
+
+module.exports = {
+  handleGetAddNewBlog,
+  handleAddNewBlog,
+  handleBlogRender,
+  handleAddComment,
+};
