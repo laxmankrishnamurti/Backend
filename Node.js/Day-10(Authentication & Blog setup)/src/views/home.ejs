@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>HomePage</title>
+    <style>
+      .container-parent {
+        max-width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+      }
+      .container {
+        display: inline;
+      }
+      .default-logo {
+        max-width: 40px;
+      }
+      .login-user-profile {
+        max-width: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-warning"><%- include('./partials/nav') %></div>
+    <h1 class="text-center mt-4">Blogs</h1>
+
+    <div class="container-parent">
+      <% if (locals.blogs) { %> <% blogs.forEach(blog => { %>
+      <div class="container-child">
+        <div class="card" style="width: 18rem">
+          <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title %></h5>
+
+            <a href="/blog/<%= blog._id %>" class="btn btn-primary"
+              >Go somewhere</a
+            >
+          </div>
+        </div>
+      </div>
+      <% }) %> <% } %>
+    </div>
+  </body>
+  <%- include('./partials/script') %>
+</html>
