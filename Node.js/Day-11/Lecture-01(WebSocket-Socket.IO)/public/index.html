@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Connection</title>
+    <style>
+      input {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+      button {
+        padding: 8px 50px;
+        background-color: black;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="inputMessage" type="text" placeholder="Enter your message" />
+    <button id="sendMessage" type="submit">Send</button>
+    <div class="message-box"></div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const inputValue = document.getElementById("inputMessage");
+    const sendBtn = document.getElementById("sendMessage");
+    const messageBoxContainer = document.querySelector(".message-box");
+
+    sendBtn.addEventListener("click", () => {
+      socket.emit("user-message", inputValue.value);
+      inputValue.value = "";
+    });
+
+    socket.on("message", (message) => {
+      console.log("message :: ", message);
+      const p = document.createElement("p");
+      p.innerHTML = message;
+      messageBoxContainer.appendChild(p);
+    });
+  </script>
+</html>
