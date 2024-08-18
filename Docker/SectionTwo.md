@@ -107,3 +107,26 @@ $ ENTRYPOINT <command> <parameter_1> </parameter_2>
 Since a new layer is created each time a new instruction is written, it is important to write in the most optimized way as possible and least number of instructions as possible. Otherwise, our container is going to be bulky/heacy that may impact on it's performance.
 
 ### Let's create our own custom Docker image using Docker file.
+
+1. Create a directory to wrap all files. (path = home/ubuntu/project(mkdir))
+2. Create a python script which simply print "Hello Docker!"
+3. Create a dockerFile. File name should start with dockerFile and start writing scripts.
+
+Copy the script paste it in the file(Demonstration Purpose)
+
+```bash
+FROM ubuntu:latest
+WORKDIR /app
+ADD . /app
+RUN apt update && apt install python -y
+CMD python /app/main.py
+LABEL color=red
+```
+
+4. Run build command to convert the script into an Image
+
+```bash
+$ docker build -t <custom_image_name> <file_location>
+
+$ docker build -t python_image .
+```

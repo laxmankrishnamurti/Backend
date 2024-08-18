@@ -209,6 +209,10 @@ $ sudo docker restart <container_name>
 
 # Enter inside a container
 $ sudo docker exec -it <container_name or id> bash
+
+# Remove rest of containers that is not running
+
+$ sudo docker container prune
 ```
 
 As we discuss, Every container has it's own path of execution beacuse every container has it's own environment it means some container might have Ubuntu OS, some have Cent OS, other container may have Windows OS, Mac OS.....etc. Hence, we can say that Container is like a Mini-Computer in which there is only bare minimum part of Different operating system is installed.
