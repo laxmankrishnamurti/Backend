@@ -105,3 +105,5 @@ $ ENTRYPOINT <command> <parameter_1> </parameter_2>
 10. LABEL :: This instruction is used to add Meta-Data of our image. We need to make use of quotes & backslashes if we want to include spaces. If there are any older labels they will be replaced with the new label vlaue. We can make use of Docker inspect command to see it's container.
 
 Since a new layer is created each time a new instruction is written, it is important to write in the most optimized way as possible and least number of instructions as possible. Otherwise, our container is going to be bulky/heacy that may impact on it's performance.
+
+### Let's create our own custom Docker image using Docker file.
