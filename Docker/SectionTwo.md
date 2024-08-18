@@ -35,7 +35,7 @@ To build a Docker Image we will require a Docker file.
 
 Docker file is like a script that we can write and then build into an image. The image can be used to create multiple containers. It is like a shell script.
 
-Developer -> Docker File -> Docker Imge -> Docker Container
+Developer -> Docker File -> Docker Image -> Docker Container
 
 ### Docker File Format.
 
