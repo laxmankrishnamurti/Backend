@@ -133,7 +133,7 @@ It includes :-
 
 1. Docker Images
 2. Docker Containers
-3. Docker Volumes
+3. Docker Volumes & Drivers
 4. Docker Networks
 5. Docker swarm nodes & services
 
@@ -223,7 +223,7 @@ bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  roo
 
 ```
 
-This is exactly same as our system result when we run the exact commond on root directory. If this is a Mini-Computer then we can play with that container and use it like a independent system.
+This is exactly same as our system result when we run the exact commond on root directory. If this is a Mini-Computer then we can play with that container and use it like an independent system.
 
 Lets create a container and install the nginx-server into the container
 
@@ -255,18 +255,6 @@ service nginx start
 ```
 
 Now, visit localhost on your computer to check whether the nginx is properly set-up or install or not. And it will also confirm that the port number that we have attached while creating that container is now exposed.
-
-## Docker Objects-Volumes
-
-Volumes are used to store conainers data. we can attach it with different containers. It is a persistant storage location for the contianers.
-
-### Docker Objects-Volumes Drivers
-
-It enhance object volumes abilities by creating persistant storage on other hosts, cloud, encrypt volumes.
-
-## Docker Objects Network
-
-A Docker network is basically a connection between one or more containers. One of the most powerful things about the Docker Containers is that they can be easily connected to one other and even other software, this makes it very easy to isolate and manage the containers.
 
 Now, at this point of stage we are able to understand about what exactly a container is. In many cases we want to delete a container but we also want to save it's configuration so that we can apply those configuration on others containers. Let see how we can do it.
 
@@ -303,3 +291,70 @@ container_one_configuration   latest    1a86bd728688   6 seconds ago   188MB
 ubuntu                        <none>    ca2b0f26964c   5 months ago    77.9MB
 
 ```
+
+Let's remove a container
+
+```bash
+sudo docker stop container_one
+
+# Remove the container to specify their name OR it's id
+sudo docker rm container_one
+
+# Remove forcefully
+sudo docker rm -f container_one
+
+# List all containers
+sudo docker ps -a
+
+# Output
+
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+
+Let's create a container with the image that we have stored earlier via commit command.
+
+```bash
+sudo docker run -it -d --name container_two -p 80:80 container_one_configuration
+
+# Output
+1f7b2ee2cd5e7f9cfe47b558f593bb5e19a45836ef500e413cd5224c87b1cb44
+
+# List containers
+sudo docker ps -a
+
+CONTAINER ID   IMAGE                         COMMAND       CREATED         STATUS         PORTS                               NAMES
+1f7b2ee2cd5e   container_one_configuration   "/bin/bash"   4 seconds ago   Up 3 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   container_two
+
+```
+
+Note :: Using that commit image will automatically download all dependencies. Like in conainer_one we have downloaded the nginx servie so when we use that commit image to create a new container what will going to happen is, first of all it will create a new container with specified name and it will also download nginx in the new container.
+
+Verify
+
+- Spin that container
+- Start Nginx server
+- Visit localhost
+
+### Docker Objects-Volumes.
+
+Volumes are used to store conainers data. we can attach it with different containers. It is a persistant storage location for the contianers.
+
+### Docker Objects-Volumes Drivers.
+
+It enhance object volumes abilities by creating persistant storage on other hosts, cloud, encrypt volumes.
+
+### Docker Objects Network.
+
+A Docker network is basically a connection between one or more containers. One of the most powerful things about the Docker Containers is that they can be easily connected to one other and even other software, this makes it very easy to isolate and manage the containers.
+
+## What is Docker Registry?
+
+Docker registry is a storage location for Docker images. These images can be versioned in the registry as well.
+
+### Docker Registry-DockerHub.
+
+DockerHub is the official registry of Docker in which there are many images are stored and we can use <code>pull</code> or <code>push</code> command to get and upload an images in our Docker environment.
+
+Alternatives :- ECR(Elastic container registry) -> AWS service , Azure container registry, JFrog Artifactory.
+
+We can think it as a NPM (Node package manager) -> Just for understanding purpose.
