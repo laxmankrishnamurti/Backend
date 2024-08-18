@@ -357,4 +357,4 @@ DockerHub is the official registry of Docker in which there are many images are 
 
 Alternatives :- ECR(Elastic container registry) -> AWS service , Azure container registry, JFrog Artifactory.
 
-We can think it as a NPM (Node package manager) -> Just for understanding purpose.
+We can think it as NPM (Node package manager) which manage all libraries for node application. -> Just for understanding purpose.
