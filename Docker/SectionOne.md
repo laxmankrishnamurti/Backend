@@ -355,6 +355,6 @@ Docker registry is a storage location for Docker images. These images can be ver
 
 DockerHub is the official registry of Docker in which there are many images are stored and we can use <code>pull</code> or <code>push</code> command to get and upload an images in our Docker environment.
 
-Alternatives :- ECR(Elastic container registry) -> AWS service , Azure container registry, JFrog Artifactory.
+Alternatives :- ECR(Elastic container registry) -> AWS service , Azure container registry, JFrog Artifactory. In these type of services we have to manage some keys that is an extra hustle for us.
 
 We can think it as NPM (Node package manager) which manage all libraries for node application. -> Just for understanding purpose.
