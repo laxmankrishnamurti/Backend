@@ -93,20 +93,20 @@ Follow Documentation
 Install
 
 ```bash
-sudo apt-get update
-sudo apt install docker.io
+$ sudo apt-get update
+$ sudo apt install docker.io
 ```
 
 Verify
 
 ```bash
-sudo docket --version
+$ sudo docket --version
 ```
 
 Remove
 
 ```bash
-sudo apt remove docker.io -y
+$ sudo apt remove docker.io -y
 ```
 
 # Docker Environment.
@@ -144,25 +144,25 @@ We can create multiple images of different operating systems with different vers
 Create images
 
 ```bash
-sudo docker pull <OS_NAME> <OS-VERSION>
+$ sudo docker pull <OS_NAME> <OS-VERSION>
 ```
 
 ```bash
 # List all images
-sudo docker images
-sudo docker images ls
+$ sudo docker images
+$ sudo docker images ls
 ```
 
 Example :-
 
 ```bash
-sudo docker pull ubuntu
+$ sudo docker pull ubuntu
 ```
 
 #### Let's create a Container using that image and learn some important commands that helps to manage containers.
 
 ```bash
-sudo docker run -it -d --name <container_name> -p <port_number> <image_name>
+$ sudo docker run -it -d --name <container_name> -p <port_number> <image_name>
 ```
 
 Flag description :-
@@ -176,13 +176,13 @@ If port conflict occurs check it by this command.
 
 ```bash
 # List which process is using the existing port
-sudo lsof -i :<port_number>
+$ sudo lsof -i :<port_number>
 
 # kill the process to resolve port conflict
-sudo kill <process id>
+$ sudo kill <process id>
 
 # kill that process forcefully
-sudo kill -9 <process id>
+$ sudo kill -9 <process id>
 ```
 
 #### Interaction with Docker Containers
@@ -190,25 +190,25 @@ sudo kill -9 <process id>
 ```bash
 # List all running containers
 # ps stands for Process status
-sudo docker ps
+$ sudo docker ps
 
 # List all containers
-sudo docker ps -a
+$ sudo docker ps -a
 
 # Spin/Run a Container
-sudo docker start <container_name/>
+$ sudo docker start <container_name/>
 
 # Stop a container
-sudo docker stop <container_name>
+$ sudo docker stop <container_name>
 
 # Stop a container forcefully
-sudo docker kill <container_name>
+$ sudo docker kill <container_name>
 
 # Restart a container
-sudo docker restart <container_name>
+$ sudo docker restart <container_name>
 
 # Enter inside a container
-sudo docker exec -it <container_name or id> bash
+$ sudo docker exec -it <container_name or id> bash
 ```
 
 As we discuss, Every container has it's own path of execution beacuse every container has it's own environment it means some container might have Ubuntu OS, some have Cent OS, other container may have Windows OS, Mac OS.....etc. Hence, we can say that Container is like a Mini-Computer in which there is only bare minimum part of Different operating system is installed.
@@ -229,18 +229,18 @@ Lets create a container and install the nginx-server into the container
 
 ```bash
 # Create
-sudo docker run -it -d --name container_one -p 80:80 ubuntu
+$ sudo docker run -it -d --name container_one -p 80:80 ubuntu
 
 # List
-sudo docker ps -a
+$ sudo docker ps -a
 
 # Run
-sudo docker start container_one
+$ sudo docker start container_one
 
 # Open the container
-sudo docker exec -ti container_one bash
+$ sudo docker exec -ti container_one bash
 
-# Update Packages :: Now, we don't need to put sudo command inside a container. Because it will not open without sudo permission.
+# Update Packages :: Now, we don't need to put $ sudo command inside a container. Because it will not open without $ sudo permission.
 apt-get update
 
 # Install Nginx-server
@@ -265,10 +265,10 @@ First of all we have to exit from the container and after that stop it.
 exit
 
 # Stop the container
-sudo docker stop container_one
+$ sudo docker stop container_one
 
 # Save container settings/configuration
-sudo docker commit container_one any_custom_image_name
+$ sudo docker commit container_one any_custom_image_name
 ```
 
 The command output will look like this
@@ -282,7 +282,7 @@ It has created an image along with that custom_image_name.
 ```bash
 # Check image list
 
-sudo docker images
+$ sudo docker images
 
 # Output
 
@@ -295,16 +295,16 @@ ubuntu                        <none>    ca2b0f26964c   5 months ago    77.9MB
 Let's remove a container
 
 ```bash
-sudo docker stop container_one
+$ sudo docker stop container_one
 
 # Remove the container to specify their name OR it's id
-sudo docker rm container_one
+$ sudo docker rm container_one
 
 # Remove forcefully
-sudo docker rm -f container_one
+$ sudo docker rm -f container_one
 
 # List all containers
-sudo docker ps -a
+$ sudo docker ps -a
 
 # Output
 
@@ -314,13 +314,13 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 Let's create a container with the image that we have stored earlier via commit command.
 
 ```bash
-sudo docker run -it -d --name container_two -p 80:80 container_one_configuration
+$ sudo docker run -it -d --name container_two -p 80:80 container_one_configuration
 
 # Output
 1f7b2ee2cd5e7f9cfe47b558f593bb5e19a45836ef500e413cd5224c87b1cb44
 
 # List containers
-sudo docker ps -a
+$ sudo docker ps -a
 
 CONTAINER ID   IMAGE                         COMMAND       CREATED         STATUS         PORTS                               NAMES
 1f7b2ee2cd5e   container_one_configuration   "/bin/bash"   4 seconds ago   Up 3 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   container_two
@@ -358,3 +358,56 @@ DockerHub is the official registry of Docker in which there are many images are 
 Alternatives :- ECR(Elastic container registry) -> AWS service , Azure container registry, JFrog Artifactory. In these type of services we have to manage some keys that is an extra hustle for us.
 
 We can think it as NPM (Node package manager) which manage all libraries for node application. -> Just for understanding purpose.
+
+#### Let's push an image from local system to DockerHub.
+
+1. Create an Account.
+2. Give an unique name to the container according to the naming convension.
+
+Format :- username(dockerhub)/container_name
+
+Lets give it an unique name
+
+```bash
+$ sudo docker tag current_image_name username/new_name
+
+# List images
+$ sudo docker images
+```
+
+3. Login into Docker
+
+```bash
+$ sudo docker login
+
+# input username and password
+# Now, push the image into DockerHub
+
+$ sudo docker push image_name
+```
+
+4. Delete the existing docker image that we have recently pushed on dockerHub.
+
+```bash
+$ sudo docker rmi image_name
+```
+
+5. Pull the image from dockerHub
+
+```bash
+$ sudo docker pull image_name(dockerHub image_name)
+```
+
+6. Now, use the image to create multiple containers.
+
+## Docker Compose.
+
+Docker compose is the service that allows us to run multiple containers at the same time.
+
+## Docker Swarm.
+
+Let say we are running four servers(nodes) and each server has multiple containers and we want to spin every container at a same time and manage it. How we can manage it?
+
+Here comes Docker Swarm. It is a service within the Docker that helps us to run and manage multiple contianers which are running on different-diffrent nodes. It goes like this :- We make a Manager node and rest of the nodes are called Worker node. We manage all nodes with the help of Manager node.
+
+Every node has a seperate Docker installed. We manage multiple nodes with the Orchastration tool. Docker Swarm is an Orchastration tool it is same as Kubernets, ECS....etc.
