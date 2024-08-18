@@ -124,7 +124,7 @@ Docker environment includes :-
 It allows for the creation and management of all the docker processes. It has three major parts to it.
 
 1. Docker CLI -> We run command on CLI to create and manage docker containers.
-2. Docker API -> It receives that command and keep transfer to Docker Daemon.
+2. Docker API -> It receives that command and transfer to the Docker Daemon and it is also responsible to send back the response which is given by Docker Daemon to the Docker CLI.
 3. Docker Daemon -> Creates and manage the new or existing container object.
 
 ## Docker Objects
@@ -159,7 +159,7 @@ Example :-
 sudo docker pull ubuntu
 ```
 
-#### Let's create a Container using that image
+#### Let's create a Container using that image and learn some important commands that helps to manage containers.
 
 ```bash
 sudo docker run -it -d --name <container_name> -p <port_number> <image_name>
@@ -174,7 +174,7 @@ Flag description :-
 
 If port conflict occurs check it by this command.
 
-````bash
+```bash
 # List which process is using the existing port
 sudo lsof -i :<port_number>
 
@@ -185,7 +185,7 @@ sudo kill <process id>
 sudo kill -9 <process id>
 ```
 
-#### Interact with Containers
+#### Interaction with Docker Containers
 
 ```bash
 # List all running containers
@@ -194,4 +194,112 @@ sudo docker ps
 
 # List all containers
 sudo docker ps -a
-````
+
+# Spin/Run a Container
+sudo docker start <container_name/>
+
+# Stop a container
+sudo docker stop <container_name>
+
+# Stop a container forcefully
+sudo docker kill <container_name>
+
+# Restart a container
+sudo docker restart <container_name>
+
+# Enter inside a container
+sudo docker exec -it <container_name or id> bash
+```
+
+As we discuss, Every container has it's own path of execution beacuse every container has it's own environment it means some container might have Ubuntu OS, some have Cent OS, other container may have Windows OS, Mac OS.....etc. Hence, we can say that Container is like a Mini-Computer in which there is only bare minimum part of Different operating system is installed.
+
+For example if we run the command :-
+
+```bash
+ls
+
+# Result will look like this
+bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+```
+
+This is exactly same as our system result when we run the exact commond on root directory. If this is a Mini-Computer then we can play with that container and use it like a independent system.
+
+Lets create a container and install the nginx-server into the container
+
+```bash
+# Create
+sudo docker run -it -d --name container_one -p 80:80 ubuntu
+
+# List
+sudo docker ps -a
+
+# Run
+sudo docker start container_one
+
+# Open the container
+sudo docker exec -ti container_one bash
+
+# Update Packages :: Now, we don't need to put sudo command inside a container. Because it will not open without sudo permission.
+apt-get update
+
+# Install Nginx-server
+apt install nginx
+
+# Check Nginx status
+service nginx status
+
+# Start Nginx, if not running
+service nginx start
+
+```
+
+Now, visit localhost on your computer to check whether the nginx is properly set-up or install or not. And it will also confirm that the port number that we have attached while creating that container is now exposed.
+
+## Docker Objects-Volumes
+
+Volumes are used to store conainers data. we can attach it with different containers. It is a persistant storage location for the contianers.
+
+### Docker Objects-Volumes Drivers
+
+It enhance object volumes abilities by creating persistant storage on other hosts, cloud, encrypt volumes.
+
+## Docker Objects Network
+
+A Docker network is basically a connection between one or more containers. One of the most powerful things about the Docker Containers is that they can be easily connected to one other and even other software, this makes it very easy to isolate and manage the containers.
+
+Now, at this point of stage we are able to understand about what exactly a container is. In many cases we want to delete a container but we also want to save it's configuration so that we can apply those configuration on others containers. Let see how we can do it.
+
+First of all we have to exit from the container and after that stop it.
+
+```bash
+# Exit from a container
+exit
+
+# Stop the container
+sudo docker stop container_one
+
+# Save container settings/configuration
+sudo docker commit container_one any_custom_image_name
+```
+
+The command output will look like this
+
+```bash
+sha256:155a24852b0af83ff1114d869a4f4db8873fc47f978224fd81ada623c76fc204
+```
+
+It has created an image along with that custom_image_name.
+
+```bash
+# Check image list
+
+sudo docker images
+
+# Output
+
+REPOSITORY                    TAG       IMAGE ID       CREATED         SIZE
+container_one_configuration   latest    1a86bd728688   6 seconds ago   188MB
+ubuntu                        <none>    ca2b0f26964c   5 months ago    77.9MB
+
+```
