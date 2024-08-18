@@ -130,3 +130,14 @@ $ docker build -t <custom_image_name> <file_location>
 
 $ docker build -t python_image .
 ```
+
+### DockerFile Best Practices.
+
+1. Create ephemeral containers :: Easy to intract and fast performance
+2. Understand build context :: Organized and Simple.
+3. Pipe Dockerfile through stdin :: Container will expire in short term.
+4. Exclude with .dockerignore. (Ex:- Images, temporary files...............etc)
+5. Use multistage builds (Thought)
+6. Do not install unnecessary packages
+7. Decouple Application
+8. Minimize the number of image layers
