@@ -82,3 +82,10 @@ $ sudo docker build -t <image_name> <Docker_file_location>
 ```
 
 # Docker File along with Alpine Image.
+
+- Alpine Image
+  - Linux distribution
+  - Light weight
+  - Easy to Store
+  - Easy to manage and transfer
+  - Strong Security Protection because it dosen't uses vulnerable libraries.
