@@ -59,7 +59,7 @@ It is similar to ADD, the difference begin that ADD can also new URL to the file
 $ COPY <source> <destination>
 ```
 
-4. RUN :: This instruction is used to run specific commands that we want run in the container during its creation. For example, We want to update the ubuntu ins tance then we can use the instruction as such :
+4. RUN :: This instruction is used to run specific commands that we want run in the container during its creation. For example, We want to update the ubuntu instance then we can use the instruction as such :
 
 ```bash
 $ RUN <command>
@@ -76,7 +76,7 @@ $ WORKDIR <directory>
 
 6. CMD :: This instruction tells the container what command to run when it gets started.
 
-There is difference with commands between before running a container and after running the container. Before running the container we used RUN command and after running the container we use CMD command.
+There is a difference with commands between before running a container and after running the container. Before running the container we used RUN command and after running the container we use CMD command.
 
 ```bash
 $ CMD <command>
