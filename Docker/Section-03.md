@@ -89,3 +89,7 @@ $ sudo docker build -t <image_name> <Docker_file_location>
   - Easy to Store
   - Easy to manage and transfer
   - Strong Security Protection because it dosen't uses vulnerable libraries.
+
+### Note :- Use DockerHub or Git/GitHub to store the Docker Image to make it available for all colleagues.
+
+AAASDFSADFSDFSADFSDFSAFAFSADFSADFSADFSADFSAFSAFSAFSAFSAFSAFSFSAF
