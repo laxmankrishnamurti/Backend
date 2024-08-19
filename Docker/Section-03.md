@@ -91,3 +91,63 @@ $ sudo docker build -t <image_name> <Docker_file_location>
   - Strong Security Protection because it dosen't uses vulnerable libraries.
 
 ### Note :- Use DockerHub or Git/GitHub to store the Docker Image to make it available for all colleagues.
+
+# Problem with the Docker File.
+
+```bash
+FROM nginx:alpine
+LABEL Developer="Laxman Krishnamurti"
+WORKDIR /apps
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+#### Problem :: Container automatically shutdown.
+
+### Why ?
+
+Docker containers are designed to run a specific process and will exit when that process finishes. Since the Dockerfile uses nginx:alpine as the base image, it includes a minimal OS (Alpine Linux) necessary for running Nginx.
+
+The problem lies in the CMD instruction:
+
+```bash
+CMD ["service", "nginx", "start"]
+```
+
+This command attempts to start the Nginx service using the service command, but that approach doesn't work well within a Docker container. Containers are typically set up to run a single foreground process. When that process ends, the container exits. The service command is designed for system-wide init scripts and isn't ideal in the container context.
+
+Instead, you should run Nginx directly in the foreground. Modify the Dockerfile's CMD instruction like this:
+
+```bash
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+This command keeps Nginx running in the foreground, which prevents the container from exiting immediately.
+
+- Main Cause :: The container exits because the service command runs Nginx as a background process and then completes. Running Nginx in the foreground will keep the container running.
+
+### Difference between Forground Processes and Background Processes.
+
+- Forground Process :: Foreground processes in the context of Docker containers (or even in traditional operating systems) refer to processes that actively run and occupy the terminal or console until they are manually stopped. They are the main processes that keep the container or terminal session active.
+
+In a Docker container, the foreground process is the primary task or service that the container is meant to run. The container remains active as long as this process is running. If the process completes or exits, the container will stop. This is why it's essential to keep the process running in the foreground if you want the container to stay alive.
+
+- Background Process :: This is a process that runs independently of the terminal or console session. It doesn't hold the session open. In a Docker container, if the main command runs as a background process (e.g., using & or daemon mode), the container will exit immediately after the command finishes because Docker expects the container to be driven by the primary process.
+
+For example, running nginx with the -g 'daemon off;' option forces Nginx to run in the foreground, keeping the container active. Without this, if Nginx runs as a daemon (background process), the container would think there's nothing left to do and would shut down.
+
+### Why Daemon off ?
+
+The daemon off; directive in Nginx configuration tells Nginx to run in the foreground instead of the background. Here's why this is important in a Docker context:
+
+- Nginx Daemon Mode (Background Process)
+
+  - By default, Nginx runs as a daemon, meaning it starts, then detaches from the terminal and runs in the background.
+  - In traditional systems (like a full OS), this is typical behavior, as services often run in the background while the system continues to operate other processes.
+
+- Why Deamon off; in Docker?
+
+  - Docker Container Behavior :: Docker containers are designed to run a single process in the foreground. The container remains active as long as this process is running. Once the process ends, the container stops.
+
+  - Foreground Process Requirement: If you run Nginx in its default mode (as a daemon), it starts and immediately detaches from the terminal, leaving no process running in the foreground. Docker then sees that there's no active process and stops the container.
+
+  - daemon off; Solution: By using nginx -g 'daemon off;', you force Nginx to run in the foreground. This means Nginx stays attached to the terminal and keeps the container running as long as Nginx is active, preventing Docker from stopping the container.
