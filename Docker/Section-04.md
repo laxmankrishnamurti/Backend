@@ -260,3 +260,15 @@ $ sudo docker run -it -d --name <container_name> --tmpfs <target> <image_name>
 ```
 
 When the container will end the tmpfs storage will also distroy.
+
+## Docker Storage Drivers
+
+In situation where we have to write in the Docker's writable layer we can make use of specific storage drivers. These will allow us to maintain control over how docker images & containers are managed and stored.
+
+Here are the few of the storage drivers
+
+- Overlay2 (Industry standard)
+- aufs
+- devicemapper
+- btrfs
+- vfs
