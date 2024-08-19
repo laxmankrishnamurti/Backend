@@ -139,7 +139,7 @@ It includes :-
 
 ### Docker Images
 
-We can create multiple images of different operating systems with different versions.
+We can create multiple images of different operating systems or Environment with different versions.
 
 Create images
 
