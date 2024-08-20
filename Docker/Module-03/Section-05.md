@@ -521,3 +521,155 @@ $ curl localhost
   </body>
 </html>
 ```
+
+### Overlay Network
+
+Overlay Network is used to establish a connection between multiple containers which are on different-different nodes/servers.
+
+In such type of scenario we use Docker Swarm.
+
+#### Establish a connection between mulltiple nodes
+
+#### Step-by-step Porcess
+
+1. Initialize Docker Swarm
+
+```bash
+$ sudo docker swarm init
+```
+
+I get the Error :- <code>docker swarm init
+Error response from daemon: could not choose an IP address to advertise since this system has multiple addresses on interface wlp0s12f0 (2409:408a:ece:3f78:386d:6a7:576d:663 and 2409:408a:ece:3f78:851e:b4f5:374c:10aa) - specify one with --advertise-addr</code>
+
+Docker Swarm requires a specific IP address to advertise the Swarm manager node to other nodes in the cluster. When a system has multiple IP addresses, Docker can't automatically choose the correct one, so we need to specify it manually using the <code> --advertise-addr</code> option.
+
+#### Debugging
+
+- Step 1: Identify the Correct IP Address
+
+```bash
+$ ip addr show
+$ nmcli device show
+```
+
+- Step 2: Initialize Docker Swarm with the Specified IP Address
+
+```bash
+$ sudo docker swarm init --advertise-addr <IP_ADDRESS>
+
+# Example
+$ sudo docker swarm init --advertise-addr 192.168.174.143
+
+# Leave Docker Swarm
+$ sudo docker swarm leave
+$ sudo docker swarm leave --force
+```
+
+- Step 3: Verify Swarm Initialization
+
+```bash
+$ sudo docker info
+
+# Look for the section labeled Swarm: active.
+```
+
+```bash
+Client: Docker Engine - Community
+ Version:    27.1.2
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.16.2
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.29.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 5
+  Running: 0
+  Paused: 0
+  Stopped: 5
+ Images: 2
+ Server Version: 27.1.2
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: active
+  NodeID: manipulated_id:57b34sdflym7gdoadsrymlcaomlsggnmf
+  Is Manager: true
+  ClusterID: manipulated_id:ts6x975zj3sasdfwv7glyx2zrgk1zjn
+  Managers: 1
+  Nodes: 1
+  Data Path Port: manipulated_port:4089
+  Orchestration:
+   Task History Retention Limit: 5
+  Raft:
+   Snapshot Interval: 10000
+   Number of Old Snapshots to Retain: 0
+   Heartbeat Tick: 1
+   Election Tick: 10
+  Dispatcher:
+   Heartbeat Period: 5 seconds
+  CA Configuration:
+   Expiry Duration: 3 months
+   Force Rotate: 0
+  Autolock Managers: false
+  Root Rotation In Progress: false
+  Node Address: manipulated_IP_address:192.168.140.201.174.183.125
+  Manager Addresses:
+   manipulated_IP_address:192.168.140.201.174.183.125
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: manipulated:8fsadfsdf57c6bcff51318944179630522a095cc9dbf9f353
+ runc version: v1.1.13-0-g58asdfaa920
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.5.0-41-generic
+ Operating System: Ubuntu 22.04.4 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 3.378GiB
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+```
+
+```bash
+# Line-number 609
+Swarm: active
+```
+
+#### Issue Resolved.
+
+```bash
+# Docker Daemon Response
+
+Swarm initialized: current node (b34lym7gdorymlcaomlsggnmf) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-manipulated-token-3djzhc6ivpk9slk55sd5p7wu2t8b0ijg9x9xm9olhlxe6xpfi6jb9nem6t-31t5tf7cny62nhph4t87gbni7 192.168.174.183:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+```
