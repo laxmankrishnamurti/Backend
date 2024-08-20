@@ -267,8 +267,8 @@ In situation where we have to write in the Docker's writable layer we can make u
 
 Here are the few of the storage drivers
 
-- Overlay2 (Industry standard)
-- aufs
-- devicemapper
-- btrfs
-- vfs
+- Overlay2 -> (Industry standard for linux system), Can be used to run container routeless(Without admin/super user permission)
+- aufs -> (Older docker version)
+- devicemapper -> (Cent OS, RedHat........enterprise linux distrubution)
+- btrfs -> (File backup, Take a snapshort)
+- vfs -> (Testing Purposes)
