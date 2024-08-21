@@ -13,3 +13,14 @@ Let take an example of Food Delivery application. Let see what are the parts tha
 
 Overall, Orchestration tools like Docker Swarm breaks down the software into small manageable chunks.
 Having different configurations and environments becomes easier with orchestration.
+
+## Benefits of Orchestration
+
+- Easy deployment
+- Easy management
+- Easy resource management
+- Allow for health monitoring of the containers
+- Load balancing among different containers
+- Easy Updating
+- Easy scaling up and rolling back
+- Creates a layer of security
