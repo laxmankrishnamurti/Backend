@@ -815,3 +815,25 @@ PING 10.0.1.10 (10.0.1.10) 56(84) bytes of data.
 rtt min/avg/max/mdev = 5.277/7.440/9.423/1.235 ms
 
 ```
+
+#### Lets try to communicate with the service_one container(replica-1) from a container which is connected with a default Bridge Network
+
+1. <code>Create a Default Container without defining it's network explicitly.</code>
+2. <code>Enter inside the container and install iputils-ping to ping service_one container(replica-1)</code>
+
+```bash
+$ sudo docker exec -it <container_name/Id> bash
+$ apt update && apt install iputils-ping
+```
+
+3. <code>Ping the service_one container</code>
+
+```bash
+# PING STATISTICS FROM default_container(Bridge Network) to service_one container(overlay network)
+
+root@d64d4sd2sde4pf87d0e75:/# ping 10.1.1.5
+PING 10.1.1.5 (10.0.1.5) 56(84) bytes of data.
+^C
+--- 10.1.1.5 ping statistics ---
+6 packets transmitted, 0 received, 100% packet loss, time 5109m
+```
