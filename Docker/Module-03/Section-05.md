@@ -676,8 +676,142 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 2. <code>Connect the other node using the joining token</code>
 
-We can simple connect two computers using the token because we have to think for a while what a node exactly is?
+We can simple connect two computers using the token because we have to think for a while that what a node exactly is?
 
 Nothing but a mini-computer.
 
-On both system Docker should be installed.
+By saying this two computers can also become a Node. On both system Docker should be installed. Copy the generated token and paste it in the second one.
+
+3. <code>Create an Overlay Network</code>
+
+```bash
+$ sudo docker network create --driver overlay <network_name>
+```
+
+On this point of stage we must know that what is Services? and why we use it?
+
+For building a robust system requires multiple services. It means let say we have an ecommerce website and there are lots of traffic on the website. And the website is designed on "Micro-services Principles" because we do not want that our website get down. So we create multiple service that helps to handle every single request efficiently without getting down. This is only possible when we use Services.
+
+In simple term services are nothing but they are just Replicas. What does it mean?
+
+It means, let say we have only one server for the website. Does it can handle the website traffic?
+
+Obviously not!
+
+We need more servers to handle the website request. And each server has same set of instructions or and data to manage those request. If one server get down then other servers can handle it because each server follow the same set of Architecture.
+
+In short, Services are just a replica of a server that helps to manage huge traffic.
+
+To be more precise lets understand with an example. Service is just a feature that we offers to our customers like there can be multiple services. Ex :- Authentication Service, Authorization Service, Product Searching Service, Product Review Service, Comments service, Payment Gateway service.....etc.
+
+Imagine every Feature that we offers to our customers is like a Service. And in that service there are multiple containers which does the same task. For example if we consider Payment Gateway service, in this service there can be multiple containers and each container does the same task. If container_one will get down then others container will take the responsibility and complete the Payment process.
+
+Same goes with other services.
+
+#### Overview
+
+<code>An Application -> Multiple Services -> Have Multiple Containers -> Doing same task</code>
+
+#### Lets create a Service
+
+4. <code>Create a Service which have three replicas.</code>
+
+```bash
+$ sudo docker service create --name <service_name> --network <network_name> --replicas <number> <image>
+```
+
+```bash
+#Output
+
+manipulated_ladkrwll6452l5pldkw3rva3by953tyz8tyjccdme
+overall progress: 3 out of 3 tasks
+1/3: running   [==================================================>]
+2/3: running   [==================================================>]
+3/3: running   [==================================================>]
+verify: Service r6452l5pldkw3rva3by953tyz8tyjccdme converged
+```
+
+#### Verify that the container is running or not on both systems. You will see that there is only one or two container is running on the Manager Node and rest of the container is running on the Worker Node. This is just an illusion. All containers are connected with the <code>overlay_network</code> and they can communicate with each other. To verify this ping a container which is on the other Node/system from Manager node. And we can also verify this by inspecting the containers.
+
+```bash
+# Manager Node
+root@host-laxmankrishnamurti:/home/laxmankrishnamurti# docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS     NAMES
+d95f8b44cfd7   nginx:latest   "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   80/tcp    service_one.1.r9b6uc6070l4038ew7hg7tvjl
+
+# Worker Node
+root@laxmankrishnamurti-desktop:/home/laxmankrishnamurti# docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS     NAMES
+3139aa8bbdba   nginx:latest   "/docker-entrypoint.…"   11 seconds ago   Up 10 seconds   80/tcp    service_one.2.lu8qjca1th7mcmoh050g0d639
+783aa8e6d7b6   nginx:latest   "/docker-entrypoint.…"   11 seconds ago   Up 10 seconds   80/tcp    service_one.3.mrblqqjca32y7nup85xjswzgi
+
+# List all containers that is running on the same network and service
+$ sudo docker service ps <service_name>
+
+# Worker Node
+root@host-laxmankrishnamurti:/home/laxmankrishnamurti# docker service ps service_one
+ID             NAME            IMAGE          NODE                         DESIRED STATE   CURRENT STATE            ERROR     PORTS
+r9b6ucsa6070l4   service_one.1   nginx:latest   host-laxmankrishnamurti      Running         Running 22 minutes ago
+lu8qjca1dsth7m   service_one.2   nginx:latest   laxmankrishnamurti-desktop   Running         Running 21 minutes ago
+mrblqqjcaer32y   service_one.3   nginx:latest   laxmankrishnamurti-desktop   Running         Running 21 minutes ago
+```
+
+```bash
+# Install PING
+$ apt update && apt install iputils-ping
+
+# Ping Statistics from Manager Node to Worker Node
+
+root@d95f8b44cfd7:/# ping 10.0.1.4
+PING 10.0.1.4 (10.0.1.4) 56(84) bytes of data.
+64 bytes from 10.0.1.4: icmp_seq=1 ttl=64 time=21.4 ms
+64 bytes from 10.0.1.4: icmp_seq=2 ttl=64 time=8.13 ms
+64 bytes from 10.0.1.4: icmp_seq=3 ttl=64 time=7.73 ms
+64 bytes from 10.0.1.4: icmp_seq=4 ttl=64 time=5.73 ms
+64 bytes from 10.0.1.4: icmp_seq=5 ttl=64 time=6.61 ms
+64 bytes from 10.0.1.4: icmp_seq=6 ttl=64 time=6.26 ms
+64 bytes from 10.0.1.4: icmp_seq=7 ttl=64 time=6.59 ms
+64 bytes from 10.0.1.4: icmp_seq=8 ttl=64 time=8.07 ms
+64 bytes from 10.0.1.4: icmp_seq=9 ttl=64 time=6.93 ms
+64 bytes from 10.0.1.4: icmp_seq=10 ttl=64 time=10.2 ms
+^C
+--- 10.0.1.4 ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 9016ms
+rtt min/avg/max/mdev = 5.733/8.765/21.437/4.390 ms
+
+```
+
+```bash
+# List all Services
+$ sudo docker service ls
+
+# Remove one or more services
+$ sudo docker service rm <service_one> <service_two> <service........n>
+```
+
+#### Lets try to communicate with containers which are on different-different services.
+
+1. <code>Create another service with two replicas</code>
+2. <code>Inspect the container which is running on different service</code>
+3. <code>Ping Fron Service_one container to Service_two container</code>
+
+```bash
+# PING STATISTICS (container_one-with service_one) to (container_two-with service_two)
+
+root@d95f8b44cfd7:/# ping 10.0.1.10
+PING 10.0.1.10 (10.0.1.10) 56(84) bytes of data.
+64 bytes from 10.0.1.10: icmp_seq=1 ttl=64 time=8.57 ms
+64 bytes from 10.0.1.10: icmp_seq=2 ttl=64 time=8.49 ms
+64 bytes from 10.0.1.10: icmp_seq=3 ttl=64 time=5.28 ms
+64 bytes from 10.0.1.10: icmp_seq=4 ttl=64 time=6.32 ms
+64 bytes from 10.0.1.10: icmp_seq=5 ttl=64 time=6.67 ms
+64 bytes from 10.0.1.10: icmp_seq=6 ttl=64 time=8.05 ms
+64 bytes from 10.0.1.10: icmp_seq=7 ttl=64 time=9.42 ms
+64 bytes from 10.0.1.10: icmp_seq=8 ttl=64 time=7.46 ms
+64 bytes from 10.0.1.10: icmp_seq=9 ttl=64 time=6.71 ms
+^C
+--- 10.0.1.10 ping statistics ---
+9 packets transmitted, 9 received, 0% packet loss, time 8013ms
+rtt min/avg/max/mdev = 5.277/7.440/9.423/1.235 ms
+
+```
