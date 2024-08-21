@@ -837,3 +837,14 @@ PING 10.1.1.5 (10.0.1.5) 56(84) bytes of data.
 --- 10.1.1.5 ping statistics ---
 6 packets transmitted, 0 received, 100% packet loss, time 5109m
 ```
+
+### None Network
+
+None Network is used to completly cut-off a container from others. It means it cannot communicate with other containers because the network provides complete isolation to the container. Even though it cannot communicate with the host system.
+
+None network disabled all options that are required to communicate with a container. So that's why we cannot establish a connection with any container which has None network connection.
+
+```bash
+# Creating a container which is completly isolated
+$ sudo docker run -it -d --name <container_name> --network none <image>
+```
