@@ -532,7 +532,7 @@ In such type of scenario we use Docker Swarm.
 
 #### Step-by-step Porcess
 
-1. Initialize Docker Swarm
+1. <code>Initialize Docker Swarm</code>
 
 ```bash
 $ sudo docker swarm init
@@ -673,3 +673,11 @@ To add a worker to this swarm, run the following command:
 
 To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
 ```
+
+2. <code>Connect the other node using the joining token</code>
+
+We can simple connect two computers using the token because we have to think for a while what a node exactly is?
+
+Nothing but a mini-computer.
+
+On both system Docker should be installed.
