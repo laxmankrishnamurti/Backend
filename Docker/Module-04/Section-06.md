@@ -295,6 +295,9 @@ project-web-1       "/docker-entrypoint.…"   web                 running      
 <code>If there is any need to use container on localhost don forget to expose the Docker Compose.</code>
 
 ```bash
+# Docker Compose up in detached mode to hide information
+$ sudo docker compose up -d
+
 # Docker Compose logs
 $ sudo docker compose logs
 
@@ -306,4 +309,8 @@ $ sudo docker compose unpause
 
 # Terminate the container execution without distroying data that is associated with the container
 $ sudo docker compose stop
+
+# List all environment variables
+$ sudo docker compose run <service_name> env
+$ sudo docker compose run wordpress env
 ```
