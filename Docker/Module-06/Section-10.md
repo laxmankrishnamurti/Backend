@@ -43,3 +43,6 @@ This is four step process.
 <code>4. Configure the cluster and then Next.</code>
 <code>5. Review and then Create.</code>
 <code>6. View Service</code>
+<code>7. Load balancer -> Target Group: (EC2 management console(opened)) -> Scroll down -> Click on load balancer -> DNS Name -> Open in new Tab.</code>
+
+<code>8. Congratulations! We deployed a website on ECS successfully. </code>
