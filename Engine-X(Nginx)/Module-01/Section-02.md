@@ -32,7 +32,7 @@ There are multiple code block section. It includes :-
   - Virtual Host Configs
 - mail block
 
-As for now we need to just focus on the http-block. At the end of the http block these is a section named <code>Virtual Host Configs.</code>
+As of now we need to just focus on the http-block. At the end of the http block there is a section named <code>Virtual Host Configs.</code>
 
 ```bash
 include /etc/nginx/conf.d/*.conf;
@@ -49,21 +49,27 @@ $ ls
 $ nano default
 ```
 
-# A journery of an Application
+```bash
+server{
+    # Listening on PORT
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-- Web Design -> Web designer -> Design Ready
-- Design -> Developer
+    # Destination directory
+    root /var/www/html
 
-  - Application
+    # Display the root file
+    index index.html index.htm index.nginx-debian.html;
 
-    - Frontend
-    - Database
-    - Backend
+    # server name
+    server_name _;
 
-      -
+    # Route
+    location / {
+        # File  Directory   404
+        try_files $uri $uri/ =404;
+    }
+}
+```
 
-- DevOps Engineer.
-  - Docker
-  - Kubernets
-  - Nginx
-  - Cloud service (AWS(Amazon), GCP(Google service cloud), Azur(Microsoft), Digital Ocean, Railway, Heroku....etc)
+Nginx server is listening on PORT 80 and whenever a new request came it fetches the index file or root file from the /var/www/html location. And we want to serve an specific file on a specific route we can define it into the location block.
