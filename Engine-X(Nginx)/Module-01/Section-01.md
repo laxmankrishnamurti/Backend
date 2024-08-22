@@ -51,3 +51,7 @@ $ sudo systemctl stop nginx
 ```
 
 5. Visit localhost if status is in Running state.
+
+#### Note :- Now, the question is from where the browser is accessing the page. Let see in the next section.
+
+<code>Remember, if we do not specify the port number of the server browser bydefault uses PORT 80 to send any kind of server request.</code>
