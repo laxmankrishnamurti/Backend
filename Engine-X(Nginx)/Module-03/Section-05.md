@@ -8,3 +8,7 @@ In such type of scenario we can use Nginx Authentication service that helps to r
 
 - Create a config file for the site
 - Set-up to serve static or dynamic files.
+  - Help
+    ```bash
+        $ sudo nginx -T
+    ```
