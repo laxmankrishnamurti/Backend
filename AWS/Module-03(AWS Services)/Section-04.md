@@ -10,6 +10,9 @@ User can be a part of a group. Instead of creating multiple users and assigning 
 - Add permissions
 - Add boundries
 - Remove Boundries
+- Account Settings
 - ...........etc
 
-### Learn by doing yourself.
+### Learn by doing yourself and follow the Documentation.
+
+[IAM Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html?icmpid=docs_iam_console)
