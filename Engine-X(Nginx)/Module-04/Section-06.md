@@ -16,3 +16,27 @@ To be more precise, Proxy is just like a middle man that does some task. If we t
 ## Lets use nginx as a reverse proxy
 
 - Create a server
+- Make a config file for the server
+
+```bash
+upstream backend {
+    server localhost:8000;
+}
+
+server {
+    listen 80;
+    # root /var/www/server;
+    # becuase as of now we are not serving static content.
+
+    server_name _;
+
+    location / {
+        proxy_pass http://backend;
+    }
+}
+```
+
+The <code>proxy_pass</code> directive helps to redirect the request on a specific location with the help of upstreams.
+
+- Associate a domain with the server IP address.
+- Start the server
