@@ -1,4 +1,4 @@
-# Introduction to Kubernetes.
+# A short notes about Kubernetes (Tip of the Ice-burg).
 
 [Practice on lab](https://kode.wiki/kubernetes-labs)
 
@@ -198,7 +198,7 @@ $ kubectl get replicaset
 $ kubectl get pods
 ```
 
-<code>Kubernetes assign a unique IP address to each pod in the cluster.</code>
+<code>Kubernetes assign a unique IP address to each pod in the cluster. And also remember when pod will restart the IP address is also going to change.</code>
 
 # Service
 
@@ -211,3 +211,7 @@ Types of service
 - LoadBalancer service
 
 Lebel helps to identify the pod to a service.
+
+Services are very important so understand the basic architecture of services wither it can ber a Docker service or Kubernetes service. It dosen't matter. Only thing that matters is to learn what a service exactly is and why we use it and how we can use it.
+
+# Don't fall in any tutorial to learn anything in the tech world. Here, everything is well-documented so follow the documentation to learn any new technology.
