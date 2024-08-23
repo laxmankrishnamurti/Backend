@@ -2,6 +2,13 @@
 
 [Practice on lab](https://kode.wiki/kubernetes-labs)
 
+Rest of Notes are in PDf Format.
+<br>
+
+[Download the PDF Notes](https://learn.kodekloud.com/user/courses/youtube-labs-kubernetes-crash-course/module/7b38906b-f64e-4b40-8cd4-57ad41790a9a/lesson/ed7c78e4-0cd3-4cc8-8d6e-3aac1b70c441)
+
+# Key-points
+
 ## What are Containers?
 
 Containers help up to create isolated environment on our systems to run applications completely isolated from each other.
@@ -58,4 +65,82 @@ $ kubectl --help
 
 # List all running nodes within a Cluster.
 $ kubectl get nodes
+```
+
+As we discussed before with kubernetes our ultimate goal is to deploy our application in the form of containers on a set of machines that are configured as a worker node in a cluster.
+
+However kubernetes does not deploy contianers directly on the worker nodes the containers are encapsulated into a kubernetes object known as a pods.
+
+- A Pod is a single instance of an application.
+- A Pod is the smallest object that we can create in kubernetes.
+
+So, the question is that what happen when we want to scale our application? Should we add more containers to the Pod?
+
+- The answer is No. We should create more Pods. Typically an application instance running as a container has a one-to-one relationship with a pod. To create more instance of an application we create more pods.
+
+Howeve the one-to-one relationship is not a straight rule. It is a common practice to have a helper container or a sidecar container as it's known along with the main application. This could be an agent that collets logs or monitors the application and reports to a third party.
+
+```bash
+# create a pod
+$ kubectl run <pod_name> <image>
+
+# Ex :- kubectl run nginx --image nginx
+
+# List all running pods
+$ kubectl get pods
+```
+
+This was a imperative way to create a pod but this will not gonna help too much. In most of the cases we use Declarative way to create pods using YAML file.
+
+Top level property for creating a yaml file
+
+- apiversion
+- kind
+- metadata
+- spec (Specification)
+
+```yaml
+# pod-definition.yml
+# It's always a good practice to stick to two spaces.
+
+apiversion: v1
+
+# Kind of pods (Case-sensitive)
+kind: Pod or Service or ReplicaSet or Deployment
+
+# Data about pods
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+
+# Specification (Different for different object/kind)
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+```
+
+Once the file is created run the command to create pods.
+
+```bash
+# Create pods
+$ kubectl create -f <file-name>
+
+# Describe pod details
+$ kubectl describe pod <pod-name>
+```
+
+In the specification object there is a key named "containers" which is a list of objects. The name that we assigned to the container is the name of the container within the pod and there could be multiple containers and each can have a different name. Like this :-
+
+```yaml
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+
+    - name: busybox
+      image: busybox
+
+    --------n containers
 ```
