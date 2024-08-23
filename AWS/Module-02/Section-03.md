@@ -37,4 +37,4 @@ There is an AWS-Service named "Security, Identity & Compliance" that offeres a s
 
 #### AAA :- Authentication(who are you), Authorization(Do you have permission to do that), Accounting(store log alogn with the user that has been the changed the configuration) (To manage server infrastructure -> To manage user database and integrate it with the server.) -> This exist before Cloud to manage AAA server.
 
-Like AAA server, IAM AWS-service is used for.
+Like AAA server, IAM AWS-service is used for except accounting.
