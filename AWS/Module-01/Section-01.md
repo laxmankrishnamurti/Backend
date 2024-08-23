@@ -32,7 +32,73 @@ Cloud Provider itself says -> We do all the heavy lifting.
 
 - Lower variable cost
 - Easy to deploy
-- Easy to maintain
-- Easy to scale
+- Low maintenance cost
+- Easy to scale (No need to guess capacity)
 - High availability
 - High Performance
+
+## Types of Cloud Computing and Deployment models
+
+white -> Managed by Us
+<br>
+<code>Color</code> -> Managed by vender
+
+<b>1. Traditional Way of deploying an appilcation -> On Premise (Not a part of cloud computing )</b>
+
+<p>Application</p>
+<p>Runtime</p>
+<p>Runtime</p>
+<p>Middleware</p>
+<p>OS</p>
+<p>Virtualization</p>
+<p>Servers</p>
+<p>Storage</p>
+<p>Networking</p>
+
+<b>2. IaaS -> Infrastructure as a service</b>
+
+<p>Application</p>
+<p>Data</p>
+<p>Runtime</p>
+<p>Middleware</p>
+<p>OS</p>
+<code>Virtualization</code><br>
+<code>Servers</code><br>
+<code>Storage</code><br>
+<code>Networking</code><br>
+
+#### Ex :- AWS
+
+<b>3. PaaS -> Platform as a service</b>
+
+<p>Application</p>
+<p>Data</p>
+<code>Runtime</code><br>
+<code>Middleware</code><br>
+<code>OS</code><br>
+<code>Virtualization</code><br>
+<code>Servers</code><br>
+<code>Storage</code><br>
+<code>Networking</code><br>
+
+#### Ex:- GoDaddy
+
+<b>4. Saas -> Software as a service</b>
+
+<code>Application</code><br>
+<code>Data</code><br>
+<code>Runtime</code><br>
+<code>Middleware</code><br>
+<code>OS</code><br>
+<code>Virtualization</code><br>
+<code>Servers</code><br>
+<code>Storage</code><br>
+<code>Networking</code><br>
+
+#### Ex:- Gmail
+
+## Deployment Model
+
+- Cloud -> Fully deployed on the cloud
+- Hybrid -> Cloud + On Premises
+- On Premises -> Deployment of resources on-premise. (Like a Private Cloud)
