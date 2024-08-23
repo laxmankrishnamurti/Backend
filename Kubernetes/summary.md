@@ -126,6 +126,8 @@ Once the file is created run the command to create pods.
 ```bash
 # Create pods
 $ kubectl create -f <file-name>
+          OR
+$ kubectl apply -f <file-name>
 
 # Describe pod details
 $ kubectl describe pod <pod-name>
@@ -144,3 +146,68 @@ spec:
 
     --------n containers
 ```
+
+# ReplicaSets
+
+To prevent user to loosing access of our application we create multiple replicas of a pod with the same functionality. So, whenever a pod will get down another pod is going to take the responsiblity to execute the request.
+
+Replicas are always running at all times. The replica set helps us run multiple instances of a single pod in the kubernetes cluster thus providing high availability.
+
+- High availability
+- Load balancing
+- Scalability
+
+A pod has a one-to-one relationship with a node. A pod can only run one node at a time. we cannot move a running pod from one node to the another. We will have to kill it and re-create it on another node.
+
+```yaml
+# labels are very important to identify the pods
+
+apiversion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: front-end
+
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: myapp
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+
+  replicas: 3
+  selector:
+    matchLabels:
+      type: front-end
+```
+
+```bash
+# Create replicas
+$ kubectl create -f <replicaset-definition.yml>
+
+# List all replicas
+$ kubectl get replicaset
+
+$ kubectl get pods
+```
+
+<code>Kubernetes assign a unique IP address to each pod in the cluster.</code>
+
+# Service
+
+A service enables communication between applications within a kubernetes cluster as well as to expose application outside the cluster to end user.
+
+Types of service
+
+- ClusterIP service
+- NodePort service
+- LoadBalancer service
+
+Lebel helps to identify the pod to a service.
