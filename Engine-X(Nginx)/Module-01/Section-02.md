@@ -73,3 +73,14 @@ server{
 ```
 
 Nginx server is listening on PORT 80 and whenever a new request came it fetches the index file or root file from the /var/www/html location. And we want to serve an specific file on a specific route we can define it into the location block.
+
+Let see what are the files that the server is trying to fetch from the /var/www/html location.
+
+```bash
+$ cd /var/www/html
+
+# Open the file
+index.nginx-debian.html
+```
+
+This is the same content that we have seen in the home page while visiting localhost.
