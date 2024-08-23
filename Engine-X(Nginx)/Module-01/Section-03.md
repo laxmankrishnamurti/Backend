@@ -1,6 +1,6 @@
 # Nginx Architecture
 
-We can create multiple instance of nginx server and each server have multiple block these blocks are called context. Every block may have seperate configuration settings. A server can contain these following blocks.
+We can create multiple instance of nginx server and each server have multiple block these blocks are called "context". Every block may have seperate configuration settings. A server can contain these following blocks.
 
 - Main Block
 
@@ -9,16 +9,16 @@ We can create multiple instance of nginx server and each server have multiple bl
   - Process id
   - Log location
 
-    - Event Block
+  - Event Block
 
-      - Number of connection per worker process
+    - Number of connection per worker process
 
-    - Stream Block
+  - Stream Block
 
-      - TCP/UDP (level-3/4) settings
+    - TCP/UDP (level-3/4) settings
 
-    - Http Block -> Handle Requests
-      - Server Block -> Virtual server OR Host Server
-        - Location Block -> Router or URI
-      - Upstream Block -> When Nginx is used as a Reverse Proxy
-        - Load Balancing
+  - Http Block -> Handle Requests
+    - Server Block -> Virtual server OR Host Server
+      - Location Block -> Router or URI
+    - Upstream Block -> When Nginx is used as a Reverse Proxy
+      - Load Balancing
