@@ -1,5 +1,7 @@
 # Introduction to Cloud Computing.
 
+Hides underlying concept of Hardware.
+
 Let's first understand how we deploy an application so that it can available to the end user. What we do when our application is ready to host basically we buy multiple servers and do lots of networking stuffs and there are lots of work in the deployment phase so we need lots of computation power and for managing all those stuffs we also need man-power they can manage it. It tipical looks like good but if we see it as a business purspective it dosen't help a lot to save money.
 
 It requires more money to run an application and make it available to the end user. And as a developer perspective if the application is so big like the application receives millions of request per day it get more harder to manage it. Basically the prolems that we face without clod computing are follows :-
