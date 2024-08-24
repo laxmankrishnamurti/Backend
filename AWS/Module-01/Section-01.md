@@ -104,3 +104,5 @@ white -> Managed by Us
 - Cloud -> Fully deployed on the cloud
 - Hybrid -> Cloud + On Premises
 - On Premises -> Deployment of resources on-premise. (Like a Private Cloud)
+
+# To be moe precise, learning about cloud computing requires a good amount of networking knowledge.
