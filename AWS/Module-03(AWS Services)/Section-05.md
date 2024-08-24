@@ -26,6 +26,8 @@
   - Elastic IP address
   - Amazon EC2 and Amazon VPC
 
-- Storage (Persistance Data Storage)
+- Storage (Persistance Data Storage) -> Instance Store
   - Amazon EBS
   - Instance store
+
+Once the instance will terminate the storage or the data that we have stored in the instance will also get deleted. Because this is going to be stored into instance storage area.
