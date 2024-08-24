@@ -70,3 +70,5 @@ The nodes for our Load Balancer distribute requests from clients to registered t
 When cross-zone load balancing is enabled, each load balancer node distributes traffic accross the registered targets in all enabled availability zone.
 
 When cross-zone load balancing is disabled, each load balancer node distributes traffic only across the registered targets in its availability zone.
+
+# Learning is continue...........
