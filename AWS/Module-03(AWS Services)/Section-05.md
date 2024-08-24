@@ -42,6 +42,8 @@ Once the instance terminated the storage or the data that we have stored in the 
 - Create image.
 - Verify -> Images (Tab) -> AMIs -> Check Status
 
+<code>Instance configuration may vary.</code>
+
 ### Share the AMI.
 
 - Select the image.
