@@ -90,3 +90,9 @@ Now the instance have internet gateway.
 - igw-xxxxxxxxxx -> Main internet gateway(Not revealed by AWS)
 
 Try to run a instance based on the custom VPC.
+
+## Flow :: VPC -> Subnet -> Route Table -> igw-xxxxx -> Attach -> Launched instance.
+
+<code>These process is just for custom VPCs and it's corresponding components. Never try to do that on default VPC.</code>
+
+## Clean up the lab :: Terminate the instnce -> De-associate all subnets from Route table -> Delete Route Table -> Detached the internate gateway -> Delete the internet gateway -> Delte the route table -> Delete all subnets -> Delete custom VPCs.
