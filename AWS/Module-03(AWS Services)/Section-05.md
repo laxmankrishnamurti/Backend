@@ -26,6 +26,6 @@
   - Elastic IP address
   - Amazon EC2 and Amazon VPC
 
-- Storage
+- Storage (Persistance Data Storage)
   - Amazon EBS
   - Instance store
