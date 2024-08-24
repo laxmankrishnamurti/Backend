@@ -65,4 +65,4 @@ Amazon Machine Images use one of the two types of virtualizations:-
 
 Note :- HVM gives better performance and uses latest hardware.
 
-<code>Use the the EC2 instance like a mini-computer and do lot of stuffs.</code>
+<code>Use the the EC2 instance like a mini-computer and deploy your application using various tools like - Docker, Kubernetes...etc</code>
