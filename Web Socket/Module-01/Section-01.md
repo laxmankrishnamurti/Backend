@@ -18,9 +18,12 @@ Client -> Send a request to Handshake with the server(Initial request -> Connect
 Now, Client and the server can send data to each other at any time.
 
 #### Use-case -> To get Real-time data.
+<<<<<<< HEAD
 
 ## Installation
 
 ```bash
 $ npm install socket.io
 ```
+=======
+>>>>>>> origin/main
