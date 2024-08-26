@@ -256,7 +256,10 @@ export class CardWidget {
 
   mount() {
     const elements = this.stripe.element();
-    this.card = elements.create("card", { style: style, hidePostalCode: true });
+    this.card = elements.create("card", {
+      style: this.style,
+      hidePostalCode: true,
+    });
     this.card.mount("#card-element");
   }
 
