@@ -230,3 +230,49 @@ export async handleOrder(){
 
 - Go to the Stripe Dashboard and refresh the page. There should be payment history displayed.
 - Help Tips :- Follow OOPS concept to organize and re-factor the code.
+
+```js
+export class CardWidget {
+  stripe = null;
+  card = null;
+  style = {
+    base: {
+      color: "#32325d",
+      fontFamily: "san-serif",
+      fontSize: "16px",
+      "::placeholder": {
+        color: "#aab7c4",
+      },
+    },
+    invalid: {
+      color: "#fa755a",
+      iconColor: "#fa755a",
+    },
+  };
+
+  constructor(stripe) {
+    this.stripe = stripe;
+  }
+
+  mount() {
+    const elements = this.stripe.element();
+    this.card = elements.create("card", { style: style, hidePostalCode: true });
+    this.card.mount("#card-element");
+  }
+
+  destroy() {
+    this.card.destroy();
+  }
+
+  async createToken() {
+    try {
+      const result = await this.stripe.createToken(this.card);
+      return result.token;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+```
+
+#### <code>We can improve the class by creating a Custom class for proper error handling.</code>
