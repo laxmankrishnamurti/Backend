@@ -43,6 +43,9 @@ function App() {
 export default App;
 ```
 
+    - Make components and make UI for the project
+    - Send player info and it's corresponding data
+
 - Server
   - Set-up the basic configuration for making a socket connection
   - Whitelist the Domain name
@@ -69,3 +72,5 @@ httpServer.listen(3000, () => {
   console.log(`Server is listening on http://localhost:3000`);
 });
 ```
+
+- Receive the data
