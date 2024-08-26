@@ -8,13 +8,14 @@ const io = new Server(httpServer, {
   },
 });
 
-io.on("connection", (socket) => {
-  if (socket) {
-    console.log("Connection established from client to the server");
-  }
+let players = [];
 
+io.on("connection", (socket) => {
   socket.on("score", (scores) => {
-    console.log(scores);
+    players.push({ ...scores, id: socket.id });
+
+    //Sending all players data
+    socket.emit("players", players);
   });
 });
 

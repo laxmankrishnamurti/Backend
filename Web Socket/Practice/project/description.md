@@ -74,3 +74,5 @@ httpServer.listen(3000, () => {
 ```
 
 - Receive the data
+
+### <code>Every Socket connection has an unique connection id</code>

@@ -14,8 +14,15 @@ function App() {
     });
   }
 
+  function fetchPlayersData() {
+    socket.on("players", (data) => {
+      console.log("Players data : ", data);
+    });
+  }
+
   useEffect(() => {
     connectSocket();
+    fetchPlayersData();
   });
 
   function handleEvent(event) {
