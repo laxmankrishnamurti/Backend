@@ -49,6 +49,18 @@ socket.on("connection", (socket) => {
   let allKeys = Object.getOwnPropertyNames(socket);
   console.log("All Keys : ", allKeys);
   console.log("Response  :: ", socket);
+
+  //Sending message to the client
+  socket.emit("server-message", "Welcome to WebSocket");
+
+  //Receving the client message
+  socket.on("client-message", (err, data) => {
+    if (!err) {
+      console.log("Client message : ", data);
+    } else {
+      console.log(err);
+    }
+  });
 });
 
 httpServer.listen(PORT, () => {
@@ -96,7 +108,7 @@ const socket = io("http://localhost:3000");
 
 socket.on("connect", () => {});
 
-//Reveving the server message
+//Receving the server message
 socket.on("message", (err, data) => {
   if (err) {
     console.log(err);
@@ -106,12 +118,17 @@ socket.on("message", (err, data) => {
 });
 
 //Reveving the server message
-//Here, "message" is an event-key which should be equal as server event-key.
-socket.on("message", (err, data) => {
+//Here, "server-message" is an event-key which should be equal as server event-key.
+socket.on("server-message", (err, data) => {
   if (err) {
     console.log(err);
   } else {
     console.log("Message from the server : ", data);
   }
 });
+
+//Emiting message from client to the server
+socket.io("client-message", "Hello there! My name is Laxman");
 ```
+
+#### This is how we can send and receive data from server to the client and from client to the server.
