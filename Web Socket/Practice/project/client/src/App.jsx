@@ -4,7 +4,8 @@ import { Input } from "./components/index.components";
 import "./App.css";
 
 function App() {
-  const [playerInfo, setPlayerInfo] = useState();
+  const [playerInfo, setPlayerInfo] = useState({});
+  const [allPlayers, setAllPlayers] = useState([]);
 
   const socket = io("localhost:3000");
 
@@ -14,15 +15,12 @@ function App() {
     });
   }
 
-  function fetchPlayersData() {
-    socket.on("players", (data) => {
-      console.log("Players data : ", data);
-    });
-  }
-
   useEffect(() => {
     connectSocket();
-    fetchPlayersData();
+    socket.on("players", (data) => {
+      console.log(data);
+      setAllPlayers(data);
+    });
   });
 
   function handleEvent(event) {
@@ -33,6 +31,10 @@ function App() {
 
   function sendScore() {
     socket.emit("score", playerInfo);
+
+    socket.on("players", (data) => {
+      setAllPlayers(data);
+    });
   }
 
   return (
@@ -58,6 +60,26 @@ function App() {
         >
           Publish Score
         </button>
+      </div>
+      <div className="w-full flex justify-center mt-10">
+        {allPlayers.length > 0 ? (
+          <table className="border-2 border-red-300 p-4">
+            <thead className="text-white">
+              <tr>
+                <th>Name</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            {allPlayers.map((player) => (
+              <tbody key={player?.name}>
+                <tr>
+                  <td>{player?.name}</td>
+                  <td>{player?.score}</td>
+                </tr>
+              </tbody>
+            ))}
+          </table>
+        ) : null}
       </div>
     </>
   );

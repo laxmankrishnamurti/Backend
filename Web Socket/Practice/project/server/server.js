@@ -12,10 +12,15 @@ let players = [];
 
 io.on("connection", (socket) => {
   socket.on("score", (scores) => {
-    players.push({ ...scores, id: socket.id });
-
+    if (scores.name) {
+      players.push({ ...scores, id: socket.id });
+    }
     //Sending all players data
     socket.emit("players", players);
+
+    setInterval(() => {
+      socket.emit("players", players);
+    }, 5000);
   });
 });
 
