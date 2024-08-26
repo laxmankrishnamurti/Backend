@@ -2,17 +2,14 @@
   "name": "websocket",
   "version": "1.0.0",
   "description": "How to make a persistant connection between client and server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Laxman Krishnamurti",
-<<<<<<< HEAD
   "license": "ISC",
   "dependencies": {
     "socket.io": "^4.7.5"
   }
-=======
-  "license": "ISC"
->>>>>>> origin/main
 }

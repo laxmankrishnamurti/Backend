@@ -36,10 +36,19 @@ const { Server } = require("socket.io");
 const PORT = process.env.PORT || 3000;
 
 const httpServer = createServer();
-const socket = new Server(httpServer, {});
 
+// White-listing the domain-name
+const socket = new Server(httpServer, {
+  cors: {
+    origin: "http://127.0.0.1:5500",
+  },
+});
+
+// Lets explore the socket connection properties and deep-dive into it
 socket.on("connection", (socket) => {
-  console.log(socket);
+  let allKeys = Object.getOwnPropertyNames(socket);
+  console.log("All Keys : ", allKeys);
+  console.log("Response  :: ", socket);
 });
 
 httpServer.listen(PORT, () => {
@@ -76,11 +85,33 @@ httpServer.listen(PORT, () => {
 ```
 
 ```js
-// White-listing the domain-name
+//Client-side
 
-const socket = new Server(httpServer, {
-  cors: {
-    origin: "http://127.0.0.1:5500",
-  },
+//Address of the server
+const socket = io("http://localhost:3000");
+
+// socket.on("connect", (response) => {
+//   console.log("Response : ", response);
+// });
+
+socket.on("connect", () => {});
+
+//Reveving the server message
+socket.on("message", (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Message from the server : ", data);
+  }
+});
+
+//Reveving the server message
+//Here, "message" is an event-key which should be equal as server event-key.
+socket.on("message", (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Message from the server : ", data);
+  }
 });
 ```
