@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { Input } from "./components/index.components";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
 function App() {
@@ -24,8 +25,9 @@ function App() {
   });
 
   function handleEvent(event) {
+    let playerId = uuidv4();
     let { name, value } = event.target;
-    let currentObj = { [name]: value };
+    let currentObj = { [name]: value, _id: playerId };
     setPlayerInfo((prev) => ({ ...prev, ...currentObj }));
   }
 
@@ -35,6 +37,11 @@ function App() {
     socket.on("players", (data) => {
       setAllPlayers(data);
     });
+  }
+
+  function handleDelete(data) {
+    console.log("delete id : ", data);
+    socket.emit("deleteData", data);
   }
 
   return (
@@ -75,6 +82,14 @@ function App() {
                 <tr>
                   <td>{player?.name}</td>
                   <td>{player?.score}</td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(player._id)}
+                      className="bg-red-500 px-4 py-2 rounded-full"
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             ))}

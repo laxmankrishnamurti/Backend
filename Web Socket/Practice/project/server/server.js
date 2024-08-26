@@ -13,14 +13,23 @@ let players = [];
 io.on("connection", (socket) => {
   socket.on("score", (scores) => {
     if (scores.name) {
-      players.push({ ...scores, id: socket.id });
+      players.push(scores);
     }
+
     //Sending all players data
     socket.emit("players", players);
 
     setInterval(() => {
       socket.emit("players", players);
     }, 5000);
+  });
+
+  //Deleting an user-data
+  socket.on("deleteData", (payload) => {
+    console.log("Players : ", players);
+    let userIndex = players.findIndex((player) => player._id === payload);
+    console.log("userIndex", userIndex);
+    players.splice(userIndex, 1);
   });
 });
 
