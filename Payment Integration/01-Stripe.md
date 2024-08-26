@@ -1,3 +1,5 @@
+# Payment Integration with Stripe
+
 # What is the flow-chart for payment integration?
 
 Integrating payment system into our application is not a big deal we just think that how these system works. Understand the basics of it what is the underlying concept of it. This is the only way to make things easy and understandable. Things never be complicated, we make things complicated. So, Understand as it is.
