@@ -217,6 +217,9 @@ export async handleOrder(){
           delete req.session.card
           return res.json({message: "Order placed but Payment Failed, you can pay at delivery time"})
         })
+      }else {
+          delete req.session.cart
+          return res.json({message: "Order has been placed successfully"})
       }
     }
   })
@@ -279,3 +282,6 @@ export class CardWidget {
 ```
 
 #### <code>We can improve the class by creating a Custom class for proper error handling.</code>
+
+- For Refund -> Select the payment details -> Click on Refund -> All arguments -> Refund.
+- Activate the account to use it in production application.
