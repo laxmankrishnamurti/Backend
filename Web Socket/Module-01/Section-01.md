@@ -25,7 +25,7 @@ Now, Client and the server can send data to each other at any time.
 $ npm install socket.io
 ```
 
-## Biletplate code template
+## Boilerplate code template
 
 ```js
 const { createServer } = require("http");
