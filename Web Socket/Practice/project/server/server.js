@@ -9,7 +9,9 @@ const socket = new Server(httpServer, {
 });
 
 socket.on("connection", (socket) => {
-  console.log(socket.client.id);
+  if (socket) {
+    console.log("Connection established from client to the server");
+  }
 });
 
 httpServer.listen(3000, () => {
